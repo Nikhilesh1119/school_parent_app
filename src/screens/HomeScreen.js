@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome';
 // import {NavigationContainer} from '@react-navigation/native';
 
-// import DashboardScreen from './DashboardScreen';
+import DashboardScreen from './DashboardScreen';
 // import AttendanceScreen from './AttendanceScreen';
 // import ProfileScreen from './ProfileScreen';
 // import EditProfile from '../components/editProfile';
@@ -12,13 +12,13 @@ import ProfileStackNavigator from '../navigation/ProfileStackNavigator';
 import Eventholiday from './eventholiday';
 import { TouchableOpacity } from 'react-native';
 
+
 const dashboard = 'Dashboard';
 const attendance = 'Attendance';
 const profile = 'ProfileScreen';
 
 const Tab = createBottomTabNavigator();
-
-export default function HomeScreen() {
+function HomeScreen() {
   const [attendanceStarted, setAttendanceStarted] = useState(false);
 
   return (
@@ -70,3 +70,5 @@ export default function HomeScreen() {
     // </NavigationContainer>
   );
 }
+
+export default HomeScreen;

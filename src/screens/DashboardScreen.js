@@ -24,6 +24,7 @@ const AttendanceDashboard = () => {
   const [totalDaysPresentYear, setTotalDaysPresentYear] = useState(0);
   const [totalClassDaysYear, setTotalClassDaysYear] = useState(180); // Example value
   const [selectedAttendance, setSelectedAttendance] = useState(null); // Track selected attendance
+  const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
   const swipeableRef = useRef(null);
   const slideAnim = useRef(new Animated.Value(Dimensions.get('window').height)).current;
 
@@ -59,6 +60,9 @@ const AttendanceDashboard = () => {
       return;
     }
 
+    // Toggle popup visibility
+    setIsPopupVisible(!isPopupVisible);
+    
     // Close the popup
     Animated.timing(slideAnim, {
       toValue: Dimensions.get('window').height,
@@ -156,47 +160,56 @@ const AttendanceDashboard = () => {
 
           {/* Slide Popup Component */}
           <Animated.View style={[styles.popup, { transform: [{ translateY: slideAnim }] }]}>
-            <View style={styles.popupContent}>
-              <View style={styles.popupButtonContainer}>
-                <TouchableOpacity
-                  onPress={handleDoneClick}
-                  style={styles.doneButton}
-                >
-                  <Text style={styles.doneButtonText}>Done</Text>
-                </TouchableOpacity>
+            <TouchableWithoutFeedback onPress={() => setIsPopupVisible(false)}>
+              <View style={styles.popupContent}>
+                <View style={styles.popupButtonContainer}>
+                  <TouchableOpacity
+                    onPress={handleDoneClick}
+                    style={styles.doneButton}
+                  >
+                    <Text style={styles.doneButtonText}>Done</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.popupHeader}>
+                  <Text style={styles.popupHeaderText}>Mark Attendance</Text>
+                  <Text style={styles.popupDateText}>2 May 2024, Thursday</Text>
+                </View>
+                <View style={styles.attendanceOptionsContainer}>
+                  <TouchableOpacity
+                    onPress={() => handleAttendanceClick('Absent')}
+                    style={[
+                      styles.attendanceOption,
+                      { backgroundColor: selectedAttendance === 'Absent' ? '#F84914' : '#fcc3b1' },
+                    ]}
+                  >
+                    <Text style={[
+                      styles.attendanceOptionText,
+                      { color: selectedAttendance === 'Absent' ? 'white' : '#F84914' }
+                    ]}>Absent</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => handleAttendanceClick('Present')}
+                    style={[
+                      styles.attendanceOption,
+                      { backgroundColor: selectedAttendance === 'Present' ? 'rgba(0, 128, 128, 0.8)' : 'rgba(0, 128, 128, 0.2)' },
+                    ]}
+                  >
+                    <Text style={[
+                      styles.attendanceOptionText,
+                      { color: selectedAttendance === 'Present' ? 'white' : '#2DBEB1' }
+                    ]}>Present</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-              <View style={styles.popupHeader}>
-                <Text style={styles.popupHeaderText}>Mark Attendance</Text>
-                <Text style={styles.popupDateText}>2 May 2024, Thursday</Text>
-              </View>
-              <View style={styles.attendanceOptionsContainer}>
-                <TouchableOpacity
-                  onPress={() => handleAttendanceClick('Absent')}
-                  style={[
-                    styles.attendanceOption,
-                    { backgroundColor: selectedAttendance === 'Absent' ? '#F84914' : '#fcc3b1' },
-                  ]}
-                >
-                  <Text style={[
-                    styles.attendanceOptionText,
-                    { color: selectedAttendance === 'Absent' ? 'white' : '#F84914' }
-                  ]}>Absent</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => handleAttendanceClick('Present')}
-                  style={[
-                    styles.attendanceOption,
-                    { backgroundColor: selectedAttendance === 'Present' ? 'rgba(0, 128, 128, 0.8)' : 'rgba(0, 128, 128, 0.2)' },
-                  ]}
-                >
-                  <Text style={[
-                    styles.attendanceOptionText,
-                    { color: selectedAttendance === 'Present' ? 'white' : '#2DBEB1' }
-                  ]}>Present</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+            </TouchableWithoutFeedback>
           </Animated.View>
+          
+          {/* Overlay for locking screen */}
+          {isPopupVisible && (
+            <TouchableWithoutFeedback onPress={() => setIsPopupVisible(false)}>
+              <View style={styles.overlay} />
+            </TouchableWithoutFeedback>
+          )}
         </ScrollView>
       </TouchableWithoutFeedback>
     </GestureHandlerRootView>
@@ -244,6 +257,7 @@ const styles = StyleSheet.create({
   attendanceOptionsContainer: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: -30 },
   attendanceOption: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingVertical: 12, borderRadius: 24, marginHorizontal: 8 },
   attendanceOptionText: { fontWeight: 'bold' },
+  overlay: { position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 999 },
 });
 
 export default AttendanceDashboard;

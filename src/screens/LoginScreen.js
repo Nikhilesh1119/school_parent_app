@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {useMemo, useState, useRef} from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import {
   SafeAreaView,
   View,
@@ -9,11 +9,52 @@ import {
 } from 'react-native';
 import Video from 'react-native-video';
 import bgvideo from '../assets/videos/loginBG.mp4';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet from '@gorhom/bottom-sheet';
 import LoginForm from '../components/LoginForm';
 
+function useStyles() {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    backgroundVideo: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+    },
+    overlay: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      paddingBottom: 50,
+    },
+    swipeContainer: {
+      alignItems: 'center',
+      marginBottom: 20,
+     
+      padding: 10,
+      borderRadius: 5,
+    },
+    swipeText: {
+      alignSelf: 'center',
+      color: 'white',
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    contentContainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+    },
+  });
+}
+
 function LoginScreen() {
+  const styles = useStyles();
   const snapPoints = useMemo(() => ['60%'], []);
   const bottomSheetRef = useRef(null);
 
@@ -21,11 +62,12 @@ function LoginScreen() {
     bottomSheetRef.current?.close();
   };
   const handleOpenPress = () => {
+    console.log("Button Pressed"); // Debug log
     bottomSheetRef.current?.expand();
   };
 
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={styles.container}>
       <View style={styles.container}>
         <Video
           resizeMode="cover"
@@ -36,7 +78,7 @@ function LoginScreen() {
         />
         <View style={styles.overlay}>
           <TouchableOpacity
-            className={styles.swipeContainer}
+            style={styles.swipeContainer}
             onPress={handleOpenPress}>
             <Text style={styles.swipeText}>Click to Login</Text>
           </TouchableOpacity>
@@ -45,9 +87,9 @@ function LoginScreen() {
             snapPoints={snapPoints}
             index={-1}
             ref={bottomSheetRef}
-            backgroundStyle={{borderRadius: 50}}>
+            backgroundStyle={{ borderRadius: 50 }}>
             <View style={styles.contentContainer}>
-              <LoginForm/>
+              <LoginForm />
             </View>
           </BottomSheet>
         </View>
@@ -55,38 +97,5 @@ function LoginScreen() {
     </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  backgroundVideo: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-  },
-  overlay: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingBottom: 50,
-  },
-  swipeContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-    backgroundColor: 'white',
-  },
-  swipeText: {
-    alignSelf: 'center',
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  icon: {
-    alignSelf: 'center',
-  },
-});
 
 export default LoginScreen;

@@ -7,9 +7,9 @@ import MyCalendar from './src/screens/Mycalendar';
 import Eventholiday from './src/screens/eventholiday';
 
 export default function App() {
-  // return <Navigation />;
+  return <Navigation />;
   // return <DashboardScreen />;
-  return <ProfileScreen navigation={undefined}/>
+  // return <ProfileScreen navigation={undefined}/>
   // return <MyCalendar />
   // return <Eventholiday/>;
 
