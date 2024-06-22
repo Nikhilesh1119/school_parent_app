@@ -1,43 +1,26 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 
 const MyCalendar = () => {
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const handleDayPress = (day) => {
+    setSelectedDate(day.dateString);
+  };
+
   return (
     <View style={styles.container}>
       <Calendar
         current={'2024-06-13'}
         minDate={'2022-05-10'}
         maxDate={'2025-05-30'}
-        onDayPress={(day) => {
-          console.log('selected day', day);
-        }}
-        monthFormat={'yyyy MM'}
-        onMonthChange={(month) => {
-          console.log('month changed', month);
-        }}
-        hideArrows={false}
+        onDayPress={handleDayPress} // Handle day press event
+        hideArrows={true} // Hide the arrows
         hideExtraDays={true}
         disableMonthChange={true}
-        renderArrow={(direction) =>
-          direction === 'left' ? (
-            <Text style={styles.arrow}>«</Text>
-          ) : (
-            <Text style={styles.arrow}>»</Text>
-          )
-        }
-        onPressArrowLeft={(subtractMonth) => subtractMonth()}
-        onPressArrowRight={(addMonth) => addMonth()}
-        disableArrowLeft={false}
-        disableArrowRight={false}
         disableAllTouchEventsForDisabledDays={true}
         enableSwipeMonths={true}
-        markedDates={{
-          '2024-06-16': { selected: true, marked: true, selectedColor: 'blue' },
-          '2024-06-17': { marked: true },
-          '2024-06-18': { marked: true, dotColor: 'red', activeOpacity: 0 },
-          '2024-06-19': { disabled: false, disableTouchEvent: true },
-        }}
         theme={{
           backgroundColor: '#ffffff',
           calendarBackground: '#ffffff',
@@ -51,17 +34,38 @@ const MyCalendar = () => {
           selectedDotColor: '#ffffff',
           arrowColor: 'orange',
           disabledArrowColor: '#d9e1e8',
-          monthTextColor: 'purple',
+          monthTextColor: 'transparent', // Make month text transparent
           indicatorColor: 'purple',
           textDayFontFamily: 'monospace',
           textMonthFontFamily: 'monospace',
           textDayHeaderFontFamily: 'monospace',
-          textDayFontWeight: '300',
+          textDayFontWeight: '600',
           textMonthFontWeight: 'bold',
-          textDayHeaderFontWeight: '300',
-          textDayFontSize: 16,
+          textDayHeaderFontWeight: 'bold', // Make day header text bold
+          textDayFontSize: 16, // Increase the day text size
           textMonthFontSize: 20,
+          textDayHeaderFontSize: 16, // Set the day header text size
+          textDayHeaderColor: 'black', // Make day header text black
           
+          // Custom style for selected date
+          'stylesheet.day.single': {
+            base: {
+              width: 32,
+              height: 32,
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+            text: {
+              fontSize: 20,
+              fontFamily: 'monospace',
+              fontWeight: '300',
+              color: 'black',
+            },
+          },
+        }}
+        // Marked dates with custom styles
+        markedDates={{
+          [selectedDate]: { selected: true, marked: true, selectedColor: '#D91111' },
         }}
       />
     </View>
@@ -72,12 +76,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 10,
-  },
-  arrow: {
-    fontSize: 24,
-    color: 'orange',
-    padding: 10,
+    borderBottomLeftRadius: 30, // Border radius at top-left
+    borderBottomRightRadius: 30,
+    overflow: 'hidden', // Ensure border radius is respected
+    
+    
   },
 });
 
