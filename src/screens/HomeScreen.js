@@ -7,15 +7,16 @@ import React, { useState } from 'react';
 // import DashboardScreen from './DashboardScreen';
 // import AttendanceScreen from './AttendanceScreen';
 // import ProfileScreen from './ProfileScreen';
-// import EditProfile from '../components/EditProfile';
-// import ProfileStackNavigator from '../navigation/ProfileStackNavigator';
+// import EditProfile from '../components/editProfile';
+import ProfileStackNavigator from '../navigation/ProfileStackNavigator';
+import Eventholiday from './eventholiday';
 import { TouchableOpacity } from 'react-native';
 
 const dashboard = 'Dashboard';
 const attendance = 'Attendance';
 const profile = 'ProfileScreen';
 
-// const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function HomeScreen() {
   const [attendanceStarted, setAttendanceStarted] = useState(false);
@@ -62,7 +63,7 @@ export default function HomeScreen() {
       })}>
       <Tab.Screen name={dashboard} component={DashboardScreen} />
       <Tab.Screen name={attendance}>
-        {() => <AttendanceScreen setAttendanceStarted={setAttendanceStarted} />}
+        {() => <Eventholiday setAttendanceStarted={setAttendanceStarted} />}
       </Tab.Screen>
       <Tab.Screen name={profile} component={ProfileStackNavigator} />
     </Tab.Navigator>

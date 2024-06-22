@@ -11,11 +11,10 @@ import {
   Modal,
   FlatList,
   ImageBackground,
-  Platform,
 } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 
 import profileback from '../assets/images/profileback.png';
+import background from '../assets/images/background.png';
 import contact from '../assets/images/contact.png';
 import editprofile from '../assets/images/editprofile.png';
 import laguage from '../assets/images/laguage.png';
@@ -54,13 +53,12 @@ export default function ProfileScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ImageBackground
-        source={profileback}
-        resizeMode="cover"
+        source={background}
+        resizeMode="stretch"
         style={styles.image}
       >
-        <View style={styles.overlay} />
         <View style={styles.header}>
           <View style={styles.pickerContainer}>
             <TouchableOpacity
@@ -80,13 +78,12 @@ export default function ProfileScreen({ navigation }) {
             }}
             style={styles.profileAvatar}
           />
-          <Text style={styles.profileName}>{selectedStudent}</Text>
-          <Text style={styles.profileEmail}>Class Name and Section</Text>
+          <Text style={styles.profileName}>Class Name and Section</Text>
         </View>
       </ImageBackground>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Preferences</Text>
+          {/* <Text style={styles.sectionTitle}>Preferences</Text> */}
           <View style={styles.sectionBody}>
             <View style={[styles.rowWrapper, styles.rowFirst]}>
               <TouchableOpacity
@@ -140,7 +137,7 @@ export default function ProfileScreen({ navigation }) {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Notifications</Text>
+          {/* <Text style={styles.sectionTitle}>Notifications</Text> */}
           <View style={styles.sectionBody}>
             <View style={[styles.rowWrapper, styles.rowFirst]}>
               <TouchableOpacity
@@ -231,21 +228,9 @@ export default function ProfileScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,
-  },
   image: {
-    width: '100%',
-    height: 'auto',
     position: 'relative',
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust opacity by changing the alpha value
+    flex: 0.5,
   },
   header: {
     paddingLeft: 24,
@@ -282,15 +267,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 30,
     marginBottom: 35,
+    position: 'absolute',
+    top: '30%', // Adjust the position to move the avatar up
+    left: '22%',
+    zIndex: 2,
   },
   profileAvatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginBottom: 8,
-    position: 'absolute',
-    top:-10, // Adjust the position to move the avatar up
-    zIndex: 2,
+    width: 150,
+    height: 150,
+    borderRadius: 100,
   },
   profileName: {
     marginTop: 25,
@@ -298,22 +283,15 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: 'black',
     borderRadius: 8,
-    padding: 5,
-    position: 'absolute',
-    top: 60,
-    zIndex: 2,
   },
   profileEmail: {
-    marginTop: 30,
     fontSize: 16,
     fontWeight: '400',
     color: 'black',
-    position: 'absolute',
-    top: 85,
-    zIndex: 2,
   },
   scrollViewContent: {
-    paddingTop: 100,
+    position:'absolute', top: 100,
+    width: '100%'
   },
   section: {
     paddingTop: 15,
@@ -336,7 +314,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 15,
     marginRight: 15,
-    shadowColor: 'purple',
+    
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 3,
