@@ -22,6 +22,10 @@ import mode from '../assets/images/mode.png';
 import help from '../assets/images/help.png';
 import downarrow from '../assets/images/downarrow.png';
 
+import { useTranslation } from 'react-i18next';
+import { Colors, Fonts, Size } from '@src/theme/fonts';
+import { scale } from 'react-native-size-matters';
+
 export default function ProfileScreen({ navigation }) {
   const [form, setForm] = useState({
     darkMode: false,
@@ -33,6 +37,7 @@ export default function ProfileScreen({ navigation }) {
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [studentModalVisible, setStudentModalVisible] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState('John Doe');
+  const {t} = useTranslation()
 
   const students = [
     { label: 'John Doe', value: 'John Doe' },
@@ -53,9 +58,9 @@ export default function ProfileScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
       <ImageBackground
-        source={background}
+        source={profileback}
         resizeMode="stretch"
         style={styles.image}
       >
@@ -78,7 +83,7 @@ export default function ProfileScreen({ navigation }) {
             }}
             style={styles.profileAvatar}
           />
-          <Text style={styles.profileName}>Class Name and Section</Text>
+          <Text style={styles.profileName}>{t('profile.classnameAndSection')}</Text>
         </View>
       </ImageBackground>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -278,11 +283,12 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   profileName: {
-    marginTop: 25,
-    fontSize: 20,
-    fontWeight: '600',
-    color: 'black',
-    borderRadius: 8,
+    marginTop: scale(25),
+    fontSize: Size.font_20,
+    // fontWeight: '600',
+    fontFamily:Fonts.BOLD,
+    color: Colors.BLACK,
+    borderRadius: scale(8),
   },
   profileEmail: {
     fontSize: 16,
@@ -314,7 +320,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 15,
     marginRight: 15,
-    
+    shadowColor: 'purple',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 3,
