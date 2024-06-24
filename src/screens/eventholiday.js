@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Image,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Calendar from "../components/Calendar";
-
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import Calendar from '../components/Calendar';
+import { Size } from "../theme/fonts";
 const Eventholiday = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
@@ -75,8 +75,7 @@ const Eventholiday = () => {
         {/* Sidebar Icon */}
         <TouchableOpacity
           style={styles.sidebarIcon}
-          onPress={() => setIsSidebarVisible(!isSidebarVisible)}
-        >
+          onPress={() => setIsSidebarVisible(!isSidebarVisible)}>
           <Text style={styles.sidebarIconText}>≡</Text>
         </TouchableOpacity>
 
@@ -86,7 +85,7 @@ const Eventholiday = () => {
             <View style={styles.sidebar}>
               <View style={styles.sidebarHeader}>
                 <Image
-                  source={{ uri: 'https://via.placeholder.com/50' }} // Replace with the actual profile image URL
+                  source={{uri: 'https://via.placeholder.com/50'}} // Replace with the actual profile image URL
                   style={styles.profileImage}
                 />
                 <Text style={styles.profileName}>John Doe</Text>
@@ -109,8 +108,8 @@ const Eventholiday = () => {
 };
 
 const styles = StyleSheet.create({
-  root: { flex: 1 },
-  container: { backgroundColor: 'white', flex: 1 },
+  root: {flex: 1},
+  container: {backgroundColor: 'white', flex: 1},
   header: {
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -137,7 +136,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
     paddingLeft: 5,
   },
-  content: { height: '100%' },
+  content: {height: '100%'},
   calendarContainer: {
     paddingTop: 20,
     paddingLeft: 2,
@@ -150,10 +149,15 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 8,
   },
-  calendarHeader: { flexDirection: 'row', marginBottom: 10 },
-  calendarMonth: { fontSize: 24, fontWeight: 'bold', color: '#4E2973', paddingLeft: 10 },
-  calendarYear: { fontSize: 24, fontWeight: 'bold', color: '#4E297380' },
-  calendar: { marginBottom: 2 },
+  calendarHeader: {flexDirection: 'row', marginBottom: 10},
+  calendarMonth: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#4E2973',
+    paddingLeft: 10,
+  },
+  calendarYear: {fontSize: 24, fontWeight: 'bold', color: '#4E297380'},
+  calendar: {marginBottom: 2},
   eventsContainer: {
     flexDirection: 'column',
     padding: 16,
@@ -171,11 +175,11 @@ const styles = StyleSheet.create({
   eventDate: {
     marginTop: 0,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#8F9BB3',
     paddingLeft: 16,
     fontSize: 18,
   },
-  divider: { height: 1, marginTop: 14, backgroundColor: '#c084fc', opacity: 0.2 },
+  divider: {height: 1, marginTop: 14, backgroundColor: '#c084fc', opacity: 0.2},
   holidayItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -187,11 +191,27 @@ const styles = StyleSheet.create({
     borderColor: '#ef4444',
     borderWidth: 1,
   },
-  holidayItemHeader: { flexDirection: 'row', alignItems: 'center', color: '#D91111' },
-  holidayIndicator: { width: 10, height: 10, borderRadius: 5, borderColor: '#D91111', borderWidth: 3 },
-  holidayText: { marginLeft: 8, color: '#D91111', fontWeight: 'bold' },
-  holidayLabel: { justifyContent: 'center', paddingHorizontal: 16, paddingVertical: 8, backgroundColor: '#D91111', borderRadius: 10 },
-  holidayLabelText: { color: 'white', fontWeight: 'bold' },
+  holidayItemHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    color: '#D91111',
+  },
+  holidayIndicator: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    borderColor: '#D91111',
+    borderWidth: 3,
+  },
+  holidayText: {marginLeft: 8, color: '#D91111', fontWeight: '900',fontSize:Size.font_18},
+  holidayLabel: {
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    backgroundColor: '#D91111',
+    borderRadius: 10,
+  },
+  holidayLabelText: {color: 'white', fontWeight: 'bold',fontSize:Size.font_16},
   eventItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -203,19 +223,54 @@ const styles = StyleSheet.create({
     borderColor: '#4E2973',
     borderWidth: 1,
   },
-  eventItemHeader: { flexDirection: 'row', alignItems: 'center', color: '#8b5cf6' },
-  eventIndicator: { width: 10, height: 10, borderRadius: 5, borderColor: '#4E2973', borderWidth: 3 },
-  eventText: { marginLeft: 8, color: '#4E2973', fontWeight: 'bold' },
-  eventLabel: { justifyContent: 'center', paddingHorizontal: 16, paddingVertical: 8, backgroundColor: '#4E2973', borderRadius: 10 },
-  eventLabelText: { color: 'white', fontWeight: 'bold' },
-  sidebarIcon: { position: 'absolute', top: 16, right: 16, marginTop: -3, borderRadius: 4, zIndex: 10 },
-  sidebarIconText: { color: '#091247', fontSize: 40 },
-  sidebar: { position: 'absolute', right: 0, top: 0, bottom: 0, width: 256, backgroundColor: '#f0f0f0', borderLeftWidth: 1, borderLeftColor: 'gray', padding: 20, zIndex: 50 },
-  sidebarHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 20 },
-  profileImage: { width: 48, height: 48, borderRadius: 24, marginRight: 16 },
-  profileName: { fontSize: 24, fontWeight: 'bold', color: '#472966' },
-  sidebarItem: { paddingVertical: 8 },
-  sidebarItemText: { fontSize: 18, color: '#714f92' },
+  eventItemHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    color: '#8b5cf6',
+  },
+  eventIndicator: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    borderColor: '#4E2973',
+    borderWidth: 3,
+  },
+  eventText: {marginLeft: 8, color: '#4E2973', fontWeight: '900',fontSize: Size.font_16},
+  eventLabel: {
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    backgroundColor: '#4E2973',
+    borderRadius: 10,
+    
+  },
+  eventLabelText: {color: 'white', fontWeight: 'bold',fontSize:Size.font_16},
+  sidebarIcon: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    marginTop: -3,
+    borderRadius: 4,
+    zIndex: 10,
+  },
+  sidebarIconText: {color: '#091247', fontSize: 40},
+  sidebar: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    width: 256,
+    backgroundColor: '#f0f0f0',
+    borderLeftWidth: 1,
+    borderLeftColor: 'gray',
+    padding: 20,
+    zIndex: 50,
+  },
+  sidebarHeader: {flexDirection: 'row', alignItems: 'center', marginBottom: 20},
+  profileImage: {width: 48, height: 48, borderRadius: 24, marginRight: 16},
+  profileName: {fontSize: 24, fontWeight: 'bold', color: '#472966'},
+  sidebarItem: {paddingVertical: 8},
+  sidebarItemText: {fontSize: 18, color: '#714f92'},
 });
 
 export default Eventholiday;

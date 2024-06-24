@@ -18,9 +18,9 @@ export default function App() {
       // Orientation.unlockAllOrientations();
     };
   }, []);
-  // return <Navigation />;
+  return <Navigation />;
   // return <DashboardScreen />;
-  return <I18nextProvider i18n={i18n}><ProfileScreen navigation={undefined} /></I18nextProvider>
+  // return <I18nextProvider i18n={i18n}><ProfileScreen navigation={undefined} /></I18nextProvider>
   // return <MyCalendar />
   // return <Eventholiday/>;
 

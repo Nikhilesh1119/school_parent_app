@@ -1,47 +1,46 @@
-/* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import {NavigationContainer} from '@react-navigation/native';
-
+import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 import DashboardScreen from './DashboardScreen';
-// import AttendanceScreen from './AttendanceScreen';
-// import ProfileScreen from './ProfileScreen';
-// import EditProfile from '../components/editProfile';
 import ProfileStackNavigator from '../navigation/ProfileStackNavigator';
 import Eventholiday from './eventholiday';
-import { TouchableOpacity } from 'react-native';
-
+import Dashicon from '../assets/images/Dashicon.png';
+import Calendaricon from '../assets/images/Calendaricon.png';
+import Profileicon from '../assets/images/Profileicon.png';
 
 const dashboard = 'Dashboard';
 const attendance = 'Attendance';
 const profile = 'ProfileScreen';
 
 const Tab = createBottomTabNavigator();
+
 function HomeScreen() {
   const [attendanceStarted, setAttendanceStarted] = useState(false);
 
   return (
-    // <NavigationContainer>
     <Tab.Navigator
-      initialRouteName={attendance}
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
-          let iconName;
+      initialRouteName={dashboard}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconSource;
           let rn = route.name;
 
           if (rn === dashboard) {
-            iconName = focused ? 'bars' : 'bars';
+            iconSource = Dashicon;
           } else if (rn === attendance) {
-            iconName = focused ? 'book' : 'book';
+            iconSource = Calendaricon;
           } else if (rn === profile) {
-            iconName = focused ? 'user' : 'user';
+            iconSource = Profileicon;
           }
+
           return (
-            <Icon
-              name={iconName}
-              size={30}
-              color={focused ? 'purple' : color}
+            <Image
+              source={iconSource}
+              style={[
+                styles.icon,
+                { tintColor: focused ? 'purple' : 'grey' },
+              ]}
             />
           );
         },
@@ -67,8 +66,14 @@ function HomeScreen() {
       </Tab.Screen>
       <Tab.Screen name={profile} component={ProfileStackNavigator} />
     </Tab.Navigator>
-    // </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    width: 25,
+    height: 25,
+  },
+});
 
 export default HomeScreen;

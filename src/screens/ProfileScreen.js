@@ -60,7 +60,7 @@ export default function ProfileScreen({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
       <ImageBackground
-        source={profileback}
+        source={background}
         resizeMode="stretch"
         style={styles.image}
       >
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
   },
   selectedStudent: {
     color: 'white',
-    fontSize: 18,
+    fontSize: Size.font_18,
     marginRight: 10,
   },
   title: {
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     marginBottom: 35,
     position: 'absolute',
     top: '30%', // Adjust the position to move the avatar up
-    left: '22%',
+    left: '8%',
     zIndex: 2,
   },
   profileAvatar: {
@@ -283,18 +283,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   profileName: {
-    marginTop: scale(25),
-    fontSize: Size.font_20,
+    marginTop: scale(20),
+    fontSize: Size.font_24,
     // fontWeight: '600',
     fontFamily:Fonts.BOLD,
     color: Colors.BLACK,
     borderRadius: scale(8),
   },
-  profileEmail: {
-    fontSize: 16,
-    fontWeight: '400',
-    color: 'black',
-  },
+  
   scrollViewContent: {
     position:'absolute', top: 100,
     width: '100%'
@@ -320,7 +316,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 15,
     marginRight: 15,
-    shadowColor: 'purple',
+  
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 3,
@@ -350,7 +346,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   rowLabel: {
-    fontSize: 17,
+    fontSize: Size.font_14,
     fontWeight: '500',
     color: '#000',
   },
@@ -360,9 +356,9 @@ const styles = StyleSheet.create({
     flexBasis: 0,
   },
   rowValue: {
-    fontSize: 17,
+    fontSize: Size.font_14,
     fontWeight: '500',
-    color: '#8B8B8B',
+    color: '#4E2973',
     marginRight: 4,
   },
   modalContainer: {

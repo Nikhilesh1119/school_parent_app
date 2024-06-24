@@ -34,7 +34,6 @@ function useStyles() {
     swipeContainer: {
       alignItems: 'center',
       marginBottom: 20,
-     
       padding: 10,
       borderRadius: 5,
     },
@@ -49,6 +48,32 @@ function useStyles() {
       alignItems: 'center',
       justifyContent: 'center',
       padding: 20,
+    },
+    header: {
+      position: 'absolute',
+      top: 50,
+      width: '100%',
+      alignItems: 'center',
+    },
+    logoText:{
+      color: 'white',
+      fontSize: 40,
+      fontWeight: '800',
+      top:10
+
+    },
+
+    headerText: {
+      color: 'white',
+      fontSize: 24,
+      fontWeight: 'semibold',
+      top:10
+    },
+    subHeaderText: {
+      color: 'white',
+      fontSize: 24,
+      fontWeight: 'semibold',
+      top:8
     },
   });
 }
@@ -76,6 +101,11 @@ function LoginScreen() {
           source={bgvideo}
           style={styles.backgroundVideo}
         />
+        <View style={styles.header}>
+        <Text style={styles.logoText}>Logo</Text>
+          <Text style={styles.headerText}>Monitor Attendance</Text>
+          <Text style={styles.subHeaderText}>Anytime!</Text>
+        </View>
         <View style={styles.overlay}>
           <TouchableOpacity
             style={styles.swipeContainer}
