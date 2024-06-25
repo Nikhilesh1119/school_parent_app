@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 import DashboardScreen from './DashboardScreen';
-import ProfileStackNavigator from '../navigation/ProfileStackNavigator';
+import ProfileStackNavigator from '@src/navigation/ProfileStackNavigator';
 import Eventholiday from './eventholiday';
-import Dashicon from '../assets/images/Dashicon.png';
-import Calendaricon from '../assets/images/Calendaricon.png';
-import Profileicon from '../assets/images/Profileicon.png';
+import Dashicon from '@src/assets/images/Dashicon.png';
+import Calendaricon from '@src/assets/images/Calendaricon.png';
+import Profileicon from '@src/assets/images/Profileicon.png';
+import { scale } from 'react-native-size-matters';
 
 const dashboard = 'Dashboard';
 const attendance = 'Attendance';
@@ -47,12 +47,12 @@ function HomeScreen() {
         tabBarActiveTintColor: 'purple',
         tabBarInactiveTintColor: 'grey',
         tabBarLabelStyle: {
-          paddingBottom: 10,
-          fontSize: 10,
+          paddingBottom: scale(10),
+          fontSize: scale(10),
         },
         tabBarStyle: {
-          padding: 10,
-          height: 70,
+          padding: scale(10),
+          height: scale(70),
         },
         tabBarButton: props =>
           attendanceStarted && route.name !== attendance ? null : (
@@ -71,8 +71,8 @@ function HomeScreen() {
 
 const styles = StyleSheet.create({
   icon: {
-    width: 25,
-    height: 25,
+    width: scale(25),
+    height: scale(25),
   },
 });
 

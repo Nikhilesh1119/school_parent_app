@@ -9,8 +9,10 @@ import {
   StyleSheet,
 } from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import Calendar from '../components/Calendar';
-import { Size } from "../theme/fonts";
+import Calendar from '@src/components/Calendar';
+import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
+import colors from '@src/theme/colors';
+import { scale } from 'react-native-size-matters';
 const Eventholiday = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
@@ -71,206 +73,174 @@ const Eventholiday = () => {
             </View>
           </ScrollView>
         </TouchableWithoutFeedback>
-
-        {/* Sidebar Icon */}
-        <TouchableOpacity
-          style={styles.sidebarIcon}
-          onPress={() => setIsSidebarVisible(!isSidebarVisible)}>
-          <Text style={styles.sidebarIconText}>≡</Text>
-        </TouchableOpacity>
-
-        {/* Sidebar */}
-        {isSidebarVisible && (
-          <TouchableWithoutFeedback onPress={() => setIsSidebarVisible(false)}>
-            <View style={styles.sidebar}>
-              <View style={styles.sidebarHeader}>
-                <Image
-                  source={{uri: 'https://via.placeholder.com/50'}} // Replace with the actual profile image URL
-                  style={styles.profileImage}
-                />
-                <Text style={styles.profileName}>John Doe</Text>
-              </View>
-              <TouchableOpacity style={styles.sidebarItem}>
-                <Text style={styles.sidebarItemText}>Edit Profile</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.sidebarItem}>
-                <Text style={styles.sidebarItemText}>Privacy and Security</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.sidebarItem}>
-                <Text style={styles.sidebarItemText}>Logout</Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableWithoutFeedback>
-        )}
       </View>
     </GestureHandlerRootView>
   );
 };
 
 const styles = StyleSheet.create({
-  root: {flex: 1},
-  container: {backgroundColor: 'white', flex: 1},
+  root: { flex: 1 },
+  container: { backgroundColor: colors.WHITE, flex: 1 },
   header: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    padding: 16,
-    backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: '#0F0616',
-    fontFamily: 'Satoshi',
-    marginBottom: 20,
+    padding: scale(16),
+    backgroundColor: colors.WHITE,
+    borderBottomWidth: scale(1),
+    borderBottomColor: colors.INDIGO,
+    marginBottom: scale(20),
   },
   headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#0F0616',
-    paddingLeft: 5,
-    marginTop: -2,
-    fontFamily: 'Satoshi',
-    top: '46px',
+    fontSize: scale(Size.font_20),
+    color: colors.INDIGO,
+    paddingLeft: scale(5),
+    marginTop: scale(-2),
+    fontFamily: Fonts.BOLD,
+    
   },
   headerSubtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#4E297380',
-    marginTop: 2,
-    paddingLeft: 5,
+    fontSize: scale(Size.font_20),
+    fontFamily: Fonts.BOLD,
+    color: colors.LIGHT_PURPLE,
+    marginTop: scale(2),
+    paddingLeft: scale(5),
   },
-  content: {height: '100%'},
+  content: { height: '100%' },
   calendarContainer: {
-    paddingTop: 20,
-    paddingLeft: 2,
-    paddingRight: 2,
-    backgroundColor: '#f5f0fb',
-    borderRadius: 30,
-    margin: 16,
-    shadowColor: 'black',
+    paddingTop: scale(20),
+    paddingLeft: scale(2),
+    paddingRight: scale(2),
+    backgroundColor: colors.MID_PURPLE,
+    borderRadius: scale(30),
+    margin: scale(16),
+    shadowColor: colors.BLACK,
     shadowOpacity: 0.2,
-    shadowRadius: 10,
-    elevation: 8,
+    shadowRadius: scale(10),
+    elevation: scale(8),
   },
-  calendarHeader: {flexDirection: 'row', marginBottom: 10},
+  calendarHeader: { flexDirection: 'row', marginBottom: scale(10) },
   calendarMonth: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#4E2973',
-    paddingLeft: 10,
+    fontSize: scale(Size.font_18),
+    fontFamily: Fonts.BOLD,
+    color: colors.PURPLE,
+    paddingLeft: scale(10),
   },
-  calendarYear: {fontSize: 24, fontWeight: 'bold', color: '#4E297380'},
-  calendar: {marginBottom: 2},
+  calendarYear: {
+    fontSize: scale(Size.font_18),
+    fontFamily: Fonts.BOLD,
+    color: colors.LIGHT_PURPLE,
+  },
+  calendar: { marginBottom: scale(2) },
   eventsContainer: {
     flexDirection: 'column',
-    padding: 16,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    maxWidth: 500,
-    height: 300,
+    padding: scale(16),
+    backgroundColor: colors.WHITE,
+    borderRadius: scale(20),
+    maxWidth: scale(500),
+    height: scale(300),
   },
   eventsTitle: {
-    fontSize: 23,
-    fontWeight: 'bold',
-    color: '#0F0616',
-    paddingLeft: 16,
+    fontSize: scale(Size.font_20),
+    fontFamily: Fonts.BOLD,
+    color: colors.INDIGO,
+    paddingLeft: scale(16),
   },
   eventDate: {
-    marginTop: 0,
-    fontWeight: 'bold',
-    color: '#8F9BB3',
-    paddingLeft: 16,
-    fontSize: 18,
+    marginTop: scale(0),
+    fontFamily: Fonts.MEDIUM,
+    color: colors.GRAY,
+    paddingLeft: scale(16),
+    fontSize: scale(Size.font_16),
   },
-  divider: {height: 1, marginTop: 14, backgroundColor: '#c084fc', opacity: 0.2},
+  divider: {
+    height: scale(1),
+    marginTop: scale(14),
+    backgroundColor: colors.GRAY,
+    opacity: 0.2,
+  },
   holidayItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 20,
-    marginTop: 16,
-    backgroundColor: '#fef2f2',
-    borderRadius: 20,
-    borderColor: '#ef4444',
-    borderWidth: 1,
+    paddingHorizontal: scale(16),
+    paddingVertical: scale(20),
+    marginTop: scale(16),
+    backgroundColor: colors.LIGHT_RED,
+    borderRadius: scale(20),
+    borderColor: colors.RED,
+    borderWidth: scale(1),
   },
   holidayItemHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    color: '#D91111',
+    color: colors.RED,
   },
   holidayIndicator: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    borderColor: '#D91111',
-    borderWidth: 3,
+    width: scale(10),
+    height: scale(10),
+    borderRadius: scale(5),
+    borderColor: colors.RED,
+    borderWidth: scale(3),
   },
-  holidayText: {marginLeft: 8, color: '#D91111', fontWeight: '900',fontSize:Size.font_18},
+  holidayText: {
+    marginLeft: scale(8),
+    color: colors.RED,
+    fontFamily: Fonts.BOLD,
+    fontSize: scale(Size.font_16),
+  },
   holidayLabel: {
     justifyContent: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: '#D91111',
-    borderRadius: 10,
+    paddingHorizontal: scale(16),
+    paddingVertical: scale(8),
+    backgroundColor: colors.RED,
+    borderRadius: scale(10),
   },
-  holidayLabelText: {color: 'white', fontWeight: 'bold',fontSize:Size.font_16},
+  holidayLabelText: {
+    color: colors.WHITE,
+    fontFamily: Fonts.BOLD,
+    fontSize: scale(Size.font_16),
+  },
   eventItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 20,
-    marginTop: 8,
-    backgroundColor: '#f3e8ff',
-    borderRadius: 20,
-    borderColor: '#4E2973',
-    borderWidth: 1,
+    paddingHorizontal: scale(16),
+    paddingVertical: scale(20),
+    marginTop: scale(8),
+    backgroundColor: colors.LIGHT_INDIGO,
+    borderRadius: scale(20),
+    borderColor: colors.INDIGO,
+    borderWidth: scale(1),
   },
   eventItemHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    color: '#8b5cf6',
+    color: colors.PURPLE,
   },
   eventIndicator: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    borderColor: '#4E2973',
-    borderWidth: 3,
+    width: scale(10),
+    height: scale(10),
+    borderRadius: scale(5),
+    borderColor: colors.PURPLE1,
+    borderWidth: scale(3),
   },
-  eventText: {marginLeft: 8, color: '#4E2973', fontWeight: '900',fontSize: Size.font_16},
+  eventText: {
+    marginLeft: scale(8),
+    color: colors.PURPLE1,
+    fontFamily: Fonts.BOLD,
+    fontSize: scale(Size.font_16),
+  },
   eventLabel: {
     justifyContent: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: '#4E2973',
-    borderRadius: 10,
-    
+    paddingHorizontal: scale(16),
+    paddingVertical: scale(8),
+    backgroundColor: colors.PURPLE1,
+    borderRadius: scale(10),
   },
-  eventLabelText: {color: 'white', fontWeight: 'bold',fontSize:Size.font_16},
-  sidebarIcon: {
-    position: 'absolute',
-    top: 16,
-    right: 16,
-    marginTop: -3,
-    borderRadius: 4,
-    zIndex: 10,
+  eventLabelText: {
+    color: colors.WHITE,
+    fontFamily: Fonts.BOLD,
+    fontSize: scale(Size.font_16),
   },
-  sidebarIconText: {color: '#091247', fontSize: 40},
-  sidebar: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    width: 256,
-    backgroundColor: '#f0f0f0',
-    borderLeftWidth: 1,
-    borderLeftColor: 'gray',
-    padding: 20,
-    zIndex: 50,
-  },
-  sidebarHeader: {flexDirection: 'row', alignItems: 'center', marginBottom: 20},
-  profileImage: {width: 48, height: 48, borderRadius: 24, marginRight: 16},
-  profileName: {fontSize: 24, fontWeight: 'bold', color: '#472966'},
-  sidebarItem: {paddingVertical: 8},
-  sidebarItemText: {fontSize: 18, color: '#714f92'},
+ 
 });
 
 export default Eventholiday;

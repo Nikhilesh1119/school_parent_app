@@ -5,6 +5,7 @@ import { object, string } from 'yup';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
+import {Size, Weight, Colors, Fonts} from '@src/theme/Fonts';
 const useStyles = () => {
   return StyleSheet.create({
     container: {
@@ -28,10 +29,13 @@ const useStyles = () => {
     welcomeText: {
       fontSize: 24,
       color: '#F97316', // Equivalent to 'text-orange-600'
+      fontFamily: Fonts.BOLD
     },
     loginText: {
       fontSize: 24,
       color: 'black',
+      fontFamily: Fonts.BOLD
+
     },
     label: {
       fontSize: 18,

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {
   ScrollView,
   View,
@@ -6,138 +6,170 @@ import {
   Text,
   TextInput,
   Pressable,
+  Image,
+  Button,
 } from "react-native";
-import { Size } from "../theme/fonts";
-
+import { Formik } from "formik";
+import { Picker } from "@react-native-picker/picker";
+import { scale } from 'react-native-size-matters';
+import Backbutton from "@src/assets/images/Backbutton.png";
+import colors from "@src/theme/colors";
+import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
 function EditProfile() {
-  const [name, setName] = React.useState("");
-  const [rollNumber, setRollNumber] = React.useState("");
-  const [classSection, setClassSection] = React.useState("");
-  const [dob, setDob] = React.useState("");
-  const [gender, setGender] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [bloodGroup, setBloodGroup] = React.useState("");
-  const [address, setAddress] = React.useState("");
-
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
-        <View style={styles.section}>
-          <View style={styles.titleContainer}>
-            <View style={styles.titleText}>
-              <Text style={styles.headerText}>Edit profile</Text>
+    <Formik
+      initialValues={{
+        name: "",
+        rollNumber: "",
+        classSection: "",
+        dob: "",
+        gender: "",
+        email: "",
+        phoneNumber: "",
+        bloodGroup: "",
+        address: "",
+      }}
+      onSubmit={(values) => {
+        console.log(values);
+      }}
+    >
+      {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.container}>
+            <View style={styles.section}>
+              <View style={styles.titleContainer}>
+                
+              <Pressable onPress={() => navigation.goBack()}>
+                  <Image source={Backbutton} style={styles.backIcon} />
+                </Pressable>
+              
+                <View style={styles.titleText}>
+                  <Text style={styles.headerText}>Edit profile</Text>
+                </View>
+              </View>
+              <View>
+                <Text style={styles.sectionHeader}>Name</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="Mahi Sharma"
+                  value={values.name}
+                  onChangeText={handleChange("name")}
+                  onBlur={handleBlur("name")}
+                />
+              </View>
+              <View>
+                <Text style={styles.sectionHeader}>Roll Number</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="Roll Number"
+                  value={values.rollNumber}
+                  onChangeText={handleChange("rollNumber")}
+                  onBlur={handleBlur("rollNumber")}
+                />
+              </View>
+              <View>
+                <Text style={styles.sectionHeader}>Class and Section</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="8th- A"
+                  value={values.classSection}
+                  onChangeText={handleChange("classSection")}
+                  onBlur={handleBlur("classSection")}
+                />
+              </View>
+              <View>
+                <Text style={styles.sectionHeader}>Date of Birth</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="DD/MM/YYYY"
+                  value={values.dob}
+                  onChangeText={handleChange("dob")}
+                  onBlur={handleBlur("dob")}
+                />
+              </View>
+              <View>
+                <Text style={styles.sectionHeader}>Gender</Text>
+              </View>
+              <View style={styles.genderContainer}>
+                <Picker
+                  selectedValue={values.gender}
+                  onValueChange={(itemValue) => setFieldValue("gender", itemValue)}
+                  style={styles.picker}
+                >
+                  <Picker.Item label="Select Gender" value="" />
+                  <Picker.Item label="Male" value="male" />
+                  <Picker.Item label="Female" value="female" />
+                  <Picker.Item label="Other" value="other" />
+                </Picker>
+              </View>
+            </View>
+            <View style={styles.section}>
+              <View>
+                <Text style={styles.sectionHeader}>Email</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="mahisharma@gmail.com"
+                  value={values.email}
+                  onChangeText={handleChange("email")}
+                  onBlur={handleBlur("email")}
+                />
+              </View>
+              <View>
+                <Text style={styles.sectionHeader}>Phone Number</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="+91 7489795305"
+                  value={values.phoneNumber}
+                  onChangeText={handleChange("phoneNumber")}
+                  onBlur={handleBlur("phoneNumber")}
+                />
+              </View>
+            </View>
+            <View style={styles.section}>
+              <View>
+                <Text style={styles.sectionHeader}>Blood Group</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="AB+"
+                  value={values.bloodGroup}
+                  onChangeText={handleChange("bloodGroup")}
+                  onBlur={handleBlur("bloodGroup")}
+                />
+              </View>
+              <View>
+                <Text style={styles.sectionHeader}>Address</Text>
+              </View>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.inputText}
+                  placeholder="Rajendra Nagar, Indore"
+                  value={values.address}
+                  onChangeText={handleChange("address")}
+                  onBlur={handleBlur("address")}
+                />
+              </View>
+              <Pressable style={styles.updateButton} onPress={handleSubmit}>
+                <Text style={styles.updateButtonText}>Update Profile</Text>
+              </Pressable>
             </View>
           </View>
-          <View>
-            <Text style={styles.sectionHeader}>Name</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="Mahi Sharma"
-              value={name}
-              onChangeText={setName}
-            />
-          </View>
-          <View>
-            <Text style={styles.sectionHeader}>Roll Number</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="Roll Number"
-              value={rollNumber}
-              onChangeText={setRollNumber}
-            />
-          </View>
-          <View>
-            <Text style={styles.sectionHeader}>Class and Section</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="8th- A"
-              value={classSection}
-              onChangeText={setClassSection}
-            />
-          </View>
-          <View>
-            <Text style={styles.sectionHeader}>Date of Birth</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="DD/MM/YYYY"
-              value={dob}
-              onChangeText={setDob}
-            />
-          </View>
-          <View>
-            <Text style={styles.sectionHeader}>Gender</Text>
-          </View>
-          <View style={styles.genderContainer}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="Female"
-              value={gender}
-              onChangeText={setGender}
-            />
-          </View>
-        </View>
-        <View style={styles.section}>
-          <View>
-            <Text style={styles.sectionHeader}>Email</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="mahisharma@gmail.com"
-              value={email}
-              onChangeText={setEmail}
-            />
-          </View>
-          <View>
-            <Text style={styles.sectionHeader}>Phone Number</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="+91 7489795305"
-              value={phoneNumber}
-              onChangeText={setPhoneNumber}
-            />
-          </View>
-        </View>
-        <View style={styles.section}>
-          <View>
-            <Text style={styles.sectionHeader}>Blood Group</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="AB+"
-              value={bloodGroup}
-              onChangeText={setBloodGroup}
-            />
-          </View>
-          <View>
-            <Text style={styles.sectionHeader}>Address</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.inputText}
-              placeholder="Rajendra Nagar, Indore"
-              value={address}
-              onChangeText={setAddress}
-            />
-          </View>
-          <Pressable style={styles.updateButton}>
-            <Text style={styles.updateButtonText}>Update Profile</Text>
-          </Pressable>
-        </View>
-      </View>
-    </ScrollView>
+        </ScrollView>
+      )}
+    </Formik>
   );
 }
 
@@ -148,122 +180,91 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    paddingBottom: 20,
+    paddingBottom: scale(20),
     marginHorizontal: "auto",
     width: "100%",
-    backgroundColor: "#FAFAFA",
-    maxWidth: 480,
-    borderRadius: 32,
+    backgroundColor: colors.OFF_WHITE,
+    maxWidth: scale(480),
+    borderRadius: scale(32),
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 16,
+    paddingHorizontal: scale(16),
     width: "100%",
-    maxWidth: "sm:hidden",
-  },
-  time: {
-    flex: 1,
-    textAlign: "center",
-    fontSize: 14,
-    lineHeight: 20,
-    color: "#27272a",
-  },
-  headerIcon: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-  },
-  iconBackground: {
-    width: 24,
-    height: 24,
-    backgroundColor: "#27272a",
-    borderRadius: 50,
-  },
-  headerImage: {
-    flex: 1,
-    aspectRatio: 1.15,
-    width: 46,
+    maxWidth: width > 768 ? width * 0.8 : "100%",
   },
   section: {
     flexDirection: "column",
-    paddingHorizontal: 16,
-    marginTop: 10,
+    paddingHorizontal: scale(16),
+    marginTop: scale(10),
     width: "100%",
-    fontSize: 24,
-    fontWeight: "bold",
-    lineHeight: 28,
-    color: "#000",
+    fontSize: scale(24),
+    fontFamily: Fonts.BOLD,
+    lineHeight: scale(28),
+    color: colors.BLACK,
   },
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: scale(20),
   },
   backIcon: {
-    aspectRatio: 0.5,
-    width: 9,
-    borderColor: "#27272a",
-    borderWidth: 1,
-    fill: "#27272a",
+    width: scale(20),
+    height: scale(20),
+    marginRight: scale(10),
   },
   titleText: {
     flex: 1,
-    textAlign: "center",
     justifyContent: "center",
-    marginLeft: 130,
+    alignItems: 'center',
   },
   headerText: {
-    fontSize: Size.font_22,
-    color: "#000000",
-    fontWeight: "700",
-    top: 15,
+    fontSize: scale(Size.font_22),
+    color: colors.BLACK,
+    fontFamily: Fonts.BOLD,
   },
   sectionHeader: {
-    marginTop: 32,
-    fontSize: Size.font_22,
-    color: "#000000",
-    fontWeight: "700",
+    marginTop: scale(32),
+    fontSize: scale(Size.font_22),
+    color: colors.BLACK,
+    fontFamily: Fonts.MEDIUM,
   },
   inputContainer: {
     flexDirection: "row",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginTop: 20,
-    fontSize: 16,
-    lineHeight: 28,
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    borderColor: "#7c3aed",
-    borderWidth: 0.25,
+    paddingHorizontal: scale(20),
+    paddingVertical: scale(10),
+    marginTop: scale(20),
+    fontSize: scale(16),
+    lineHeight: scale(28),
+    backgroundColor: colors.WHITE,
+    borderRadius: scale(16),
+    borderWidth: scale(0.25),
     borderOpacity: 0.5,
-    color: "#27272a",
     opacity: 0.6,
   },
   inputText: {
     flex: 1,
-    color: "#0F061699",
-    fontSize: Size.font_15,
-    fontWeight: "700",
+    fontSize: scale(Size.font_15),
+    fontFamily: Fonts.MEDIUM,
   },
   genderContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 32,
-    paddingVertical: 10,
-    marginTop: 32,
-    fontSize: 14,
-    lineHeight: 20,
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    borderColor: "#7c3aed",
-    borderWidth: 0.25,
+    paddingHorizontal: scale(32),
+    paddingVertical: scale(10),
+    marginTop: scale(32),
+    fontSize: scale(14),
+    lineHeight: scale(20),
+    borderRadius: scale(16),
+    borderWidth: scale(0.25),
     borderOpacity: 0.5,
-    color: "#27272a",
     opacity: 0.6,
+  },
+  picker: {
+    flex: 1,
   },
   genderText: {
     flex: 1,
@@ -271,37 +272,36 @@ const styles = StyleSheet.create({
   },
   dropdownIcon: {
     aspectRatio: 0.85,
-    width: 18,
+    width: scale(18),
   },
   flexGrow: {
     flex: 1,
     textAlign: "center",
   },
   editIcon: {
-    width: 24,
+    width: scale(24),
     aspectRatio: 1,
   },
   addIcon: {
     alignSelf: "flex-end",
-    marginRight: 40,
+    marginRight: scale(40),
     aspectRatio: 0.85,
-    width: 18,
+    width: scale(18),
   },
   updateButton: {
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 64,
-    paddingVertical: 16,
-    marginTop: 40,
-    backgroundColor: "#4E2973",
-    borderRadius: 40,
+    paddingHorizontal: scale(40),
+    paddingVertical: scale(10),
+    marginTop: scale(40),
+    backgroundColor: colors.PURPLE,
+    borderRadius: scale(40),
     textAlign: "center",
-    color: "#f5f5f",
   },
   updateButtonText: {
-    color: '#fff',
-    fontWeight: '900',
-    fontSize: Size.font_20,
+    color: colors.WHITE,
+    fontFamily: Fonts.BOLD,
+    fontSize: scale(Size.font_20),
   }
 });
 

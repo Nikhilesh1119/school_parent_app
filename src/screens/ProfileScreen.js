@@ -13,17 +13,17 @@ import {
   ImageBackground,
 } from 'react-native';
 
-import profileback from '../assets/images/profileback.png';
-import background from '../assets/images/background.png';
-import contact from '../assets/images/contact.png';
-import editprofile from '../assets/images/editprofile.png';
-import laguage from '../assets/images/laguage.png';
-import mode from '../assets/images/mode.png';
-import help from '../assets/images/help.png';
-import downarrow from '../assets/images/downarrow.png';
 
+import background from '@src/assets/images/background.png';
+import contact from '@src/assets/images/contact.png';
+import editprofile from '@src/assets/images/editprofile.png';
+import laguage from '@src/assets/images/laguage.png';
+import mode from '@src/assets/images/mode.png';
+import help from '@src/assets/images/help.png';
+import downarrow from '@src/assets/images/downarrow.png';
+import colors from '@src/theme/colors';
 import { useTranslation } from 'react-i18next';
-import { Colors, Fonts, Size } from '@src/theme/fonts';
+import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
 import { scale } from 'react-native-size-matters';
 
 export default function ProfileScreen({ navigation }) {
@@ -238,117 +238,105 @@ const styles = StyleSheet.create({
     flex: 0.5,
   },
   header: {
-    paddingLeft: 24,
-    paddingRight: 24,
-    marginBottom: 12,
-    marginTop: 20,
+    paddingLeft: scale(24),
+    paddingRight: scale(24),
+    marginBottom: scale(12),
+    marginTop: scale(20),
   },
   pickerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 110,
+    marginLeft: scale(100),
   },
   pickerTouchable: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'transparent',
-    padding: 10,
-    borderBottomWidth: 1,
-   
+    padding: scale(10),
+    borderBottomWidth: scale(1),
   },
   selectedStudent: {
-    color: 'white',
+    color: colors.WHITE,
     fontSize: Size.font_18,
-    marginRight: 10,
+    marginRight: scale(10),
+    fontFamily: Fonts.BOLD,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 16,
-  },
+ 
   profile: {
     alignItems: 'center',
-    marginTop: 30,
-    marginBottom: 35,
+    marginTop: scale(30),
+    marginBottom: scale(35),
     position: 'absolute',
-    top: '30%', // Adjust the position to move the avatar up
+    top: '25%', // Adjust the position to move the avatar up
     left: '8%',
     zIndex: 2,
   },
   profileAvatar: {
-    width: 150,
-    height: 150,
-    borderRadius: 100,
+    width: scale(120),
+    height: scale(120),
+    borderRadius: scale(100),
   },
   profileName: {
-    marginTop: scale(20),
+    marginTop: scale(15),
     fontSize: Size.font_24,
-    // fontWeight: '600',
-    fontFamily:Fonts.BOLD,
+    fontWeight: Weight.full,
+    fontFamily: Fonts.BOLD,
     color: Colors.BLACK,
     borderRadius: scale(8),
+
   },
   
   scrollViewContent: {
-    position:'absolute', top: 100,
-    width: '100%'
+    position: 'absolute', 
+    top: scale(80),
+    width: '100%',
   },
   section: {
-    paddingTop: 15,
+    paddingTop: scale(10),
   },
-  sectionTitle: {
-    marginVertical: 8,
-    marginHorizontal: 24,
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#a7a7a7',
-    textTransform: 'uppercase',
-    letterSpacing: 1.2,
-  },
+ 
   sectionBody: {
-    paddingLeft: 20,
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#e3e3e3',
-    borderRadius: 20,
-    marginLeft: 15,
-    marginRight: 15,
-  
-    shadowOffset: { width: 0, height: 2 },
+    paddingLeft: scale(20),
+    backgroundColor: colors.WHITE,
+    borderTopWidth: scale(1),
+    borderBottomWidth: scale(1),
+    borderColor: colors.WHITE,
+    borderRadius: scale(20),
+    marginLeft: scale(15),
+    marginRight: scale(15),
+    shadowOffset: { width: 0, height: scale(2) },
     shadowOpacity: 0.8,
-    shadowRadius: 3,
+    shadowRadius: scale(3),
     elevation: 5,
-    marginBottom:5
+    marginBottom: scale(5),
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingRight: 16,
-    height: 50,
+    paddingRight: scale(16),
+    height: scale(40),
   },
   rowWrapper: {
-    borderTopWidth: 1,
-    borderColor: '#e3e3e3',
+    borderTopWidth: scale(1),
+    borderColor: colors.WHITE,
   },
   rowFirst: {
     borderTopWidth: 0,
   },
   rowIcon: {
-    width: 30,
-    height: 30,
-    borderRadius: 4,
+    width: scale(30),
+    height: scale(30),
+    borderRadius: scale(4),
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 12,
+    marginRight: scale(12),
   },
   rowLabel: {
     fontSize: Size.font_14,
-    fontWeight: '500',
-    color: '#000',
+    fontFamily:Fonts.MEDIUM,
+    color: colors.BLACK,
   },
   rowSpacer: {
     flexGrow: 1,
@@ -357,66 +345,67 @@ const styles = StyleSheet.create({
   },
   rowValue: {
     fontSize: Size.font_14,
-    fontWeight: '500',
-    color: '#4E2973',
-    marginRight: 4,
+    fontFamily: Fonts.MEDIUM,
+    color: colors.PURPLE,
+    marginRight: scale(4),
   },
   modalContainer: {
     flex: 1,
     justifyContent: 'flex-end', // Align items to the bottom
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    
   },
   modalContent: {
     width: '100%',
-    padding: 20,
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
+    padding: scale(20),
+    backgroundColor: colors.WHITE,
+    borderTopLeftRadius: scale(16),
+    borderTopRightRadius: scale(16),
     elevation: 5,
   },
   modalTitle: {
-    fontSize: 20,
+    fontSize: scale(20),
     fontWeight: '600',
-    marginBottom: 10,
+    marginBottom: scale(10),
     textAlign: 'center',
-    color:"black"
+    color: colors.BLACK,
   },
   languageOption: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: scale(10),
+    paddingHorizontal: scale(20),
   },
   languageText: {
-    fontSize: 16,
-    color: '#333',
+    fontSize: Size.font_16,
+    color: colors.PURPLE,
+    fontFamily:Fonts.BOLD,
+
   },
 });
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
-    fontSize: 18,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    color: 'white',
-    paddingRight: 30, // Ensure the text is never behind the icon
-    width: 200, // Adjust the width of the picker
+    fontSize: scale(18),
+    paddingVertical: scale(8),
+    paddingHorizontal: scale(10),
+    borderWidth: scale(1),
+    borderColor: colors.LIGHT_GRAY,
+    borderRadius: scale(4),
+    color: colors.WHITE,
+    paddingRight: scale(30), // Ensure the text is never behind the icon
+    width: scale(200), // Adjust the width of the picker
   },
   inputAndroid: {
-    fontSize: 18,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
-    
-    borderRadius: 8,
-    color: 'white',
-    paddingRight: 15, // Ensure the text is never behind the icon
-    width: 150, // Adjust the width of the picker
+    fontSize: scale(18),
+    paddingHorizontal: scale(10),
+    paddingVertical: scale(8),
+    borderWidth: scale(0.5),
+    borderRadius: scale(8),
+    color: colors.WHITE,
+    paddingRight: scale(15), // Ensure the text is never behind the icon
+    width: scale(150), // Adjust the width of the picker
   },
   iconContainer: {
-    top: 12,
-    right: 12,
+    top: scale(12),
+    right: scale(12),
   },
 });

@@ -13,8 +13,10 @@ import {
   StyleSheet,
 } from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import Calendar from '../components/Calendar'; // Assuming Calendar is a custom component
-import {Size, Weight, Colors, Fonts} from '../theme/fonts';
+import Calendar from '@src/components/Calendar'; // Assuming Calendar is a custom component
+import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
+import colors from '@src/theme/colors';
+import { scale } from 'react-native-size-matters';
 const AttendanceDashboard = () => {
   const [selectedView, setSelectedView] = useState('Daily');
   const [confirmationMessage, setConfirmationMessage] = useState('');
@@ -154,7 +156,7 @@ const AttendanceDashboard = () => {
                     <View style={styles.sidebarHeadersub}>
                       <Text style={styles.profileName}>John Doe</Text>
                       <TouchableOpacity style={styles.sidebarEdit}>
-                        <Text style={styles.sidebarItemText}>Edit Profile</Text>
+                        <Text style={styles.sidebarEditText}>Edit Profile</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -203,8 +205,8 @@ const AttendanceDashboard = () => {
                       {
                         backgroundColor:
                           selectedAttendance === 'Absent'
-                            ? '#F84914'
-                            : '#fcc3b1',
+                            ? colors.DARK_ORANGE
+                            : colors.LIGHT_ORANGE,
                       },
                     ]}>
                     <Text
@@ -213,8 +215,8 @@ const AttendanceDashboard = () => {
                         {
                           color:
                             selectedAttendance === 'Absent'
-                              ? 'white'
-                              : '#F84914',
+                              ? colors.WHITE
+                              : colors.DARK_ORANGE,
                         },
                       ]}>
                       Absent
@@ -227,8 +229,8 @@ const AttendanceDashboard = () => {
                       {
                         backgroundColor:
                           selectedAttendance === 'Present'
-                            ? 'rgba(0, 128, 128, 0.8)'
-                            : 'rgba(0, 128, 128, 0.2)',
+                            ? colors.DARK_CYAN
+                            : colors.LIGHT_CYAN,
                       },
                     ]}>
                     <Text
@@ -237,8 +239,8 @@ const AttendanceDashboard = () => {
                         {
                           color:
                             selectedAttendance === 'Present'
-                              ? 'white'
-                              : '#2DBEB1',
+                              ? colors.WHITE
+                              : colors.DARK_CYAN,
                         },
                       ]}>
                       Present
@@ -257,171 +259,196 @@ const AttendanceDashboard = () => {
 const styles = StyleSheet.create({
   root: {flex: 1},
   container: {},
-  header: {flex: 1, backgroundColor: 'white'},
+  header: {flex: 1, backgroundColor: colors.WHITE},
   headerContent: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    padding: 16,
-    backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: '#0F0616',
+    padding: scale(16),
+    backgroundColor: colors.WHITE,
+    borderBottomWidth: scale(1),
+    borderBottomColor: colors.INDIGO,
   },
   nameText: {
     fontSize: Size.font_20,
-    fontWeight: 'bold',
-    color: '#0F0616',
-    paddingLeft: 5,
-    marginTop: -2,
+    fontFamily: Fonts.BOLD,
+    color: colors.INDIGO,
+    paddingLeft: scale(5),
+    marginTop: -scale(-2),
+    // fontFamily:Fonts.BOLD
   },
   dateText: {
     fontSize: Size.font_20,
-    fontWeight: 'bold',
-    color: '#4E297380',
+    fontFamily: Fonts.BOLD,
+    color: colors.LIGHT_PURPLE,
     marginTop: 2,
     paddingLeft: 5,
   },
   menuButton: {
     position: 'absolute',
-    top: 16,
-    right: 16,
-    marginTop: -3,
-    borderRadius: 4,
+    top: scale(16),
+    right: scale(16),
+    marginTop: scale(-3),
+    borderRadius: scale(4),
     zIndex: 10,
   },
-  menuText: {color: '#091247', fontSize: 40},
+  menuText: {color: colors.PURPLE1, fontSize: 40},
   calendarContainer: {
-    paddingTop: 20,
-    paddingLeft: 2,
-    paddingRight: 2,
-    backgroundColor: 'rgba(78, 41, 115, 0.05)',
-    borderRadius: 30,
-    margin: 16,
-    shadowColor: 'black',
+    paddingTop: scale(20),
+    paddingLeft: scale(2),
+    paddingRight: scale(2),
+    backgroundColor: colors.Light_Purple1,
+    borderRadius: scale(30),
+    margin: scale(16),
+    shadowColor: colors.BLACK,
     shadowOpacity: 0.8,
-    shadowRadius: 10,
+    shadowRadius: scale(10),
   },
-  calendarHeader: {flexDirection: 'row', marginBottom: 10},
+  calendarHeader: {flexDirection: 'row', marginBottom: scale(10)},
   monthText: {
     fontSize: Size.font_18,
-    fontWeight: 'bold',
-    color: '#4E2973',
-    paddingLeft: 10,
+    fontFamily: Fonts.BOLD,
+    color: colors.PURPLE,
+    paddingLeft: scale(10),
+    // fontFamily:Fonts.BOLD
   },
-  yearText: {fontSize: Size.font_18, fontWeight: 'bold', color: '#4E297380'},
+  yearText: {
+    fontSize: Size.font_18,
+    fontFamily: Fonts.BOLD,
+    color: colors.LIGHT_PURPLE,
+  },
   attendanceSummaryContainer: {
     flex: 1,
     flexDirection: 'column',
-    paddingHorizontal: 20,
-    paddingVertical: 24,
-    backgroundColor: 'white',
-    borderRadius: 24,
-    shadowColor: '#000',
+    paddingHorizontal: scale(20),
+    paddingVertical: scale(24),
+    backgroundColor: colors.WHITE,
+    borderRadius: scale(24),
+    shadowColor: colors.BLACK,
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-    elevation: 2,
-    maxWidth: 380,
+    elevation: scale(2),
+    // maxWidth: scale(380),
     textAlign: 'center',
-    marginLeft: 15,
-    marginBottom: 5,
+    marginHorizontal: scale(15),
+    marginBottom: scale(5),
   },
   attendanceHeaderText: {
     fontSize: Size.font_20,
-    fontWeight: '900',
-    color: '#0F0616',
+    fontFamily: Fonts.BOLD,
+    color: colors.INDIGO,
+    // fontFamily:Fonts.BOLD_ITALIC
   },
   attendanceSubHeaderText: {
     fontSize: Size.font_16,
-    fontWeight: 'bold',
-    color: '#4E297380',
-    marginTop: 5,
+    fontFamily: Fonts.MEDIUM_ITALIC,
+    color: colors.LIGHT_PURPLE,
+    marginTop: scale(5),
   },
-  divider: {marginTop: 14, height: 1, backgroundColor: '#7C3AED', opacity: 0.2},
+  divider: {
+    marginTop: scale(14),
+    height: scale(1),
+    backgroundColor: colors.LIGHT_PURPLE,
+    opacity: 0.2,
+  },
   summaryBox: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 28,
-    paddingVertical: 16,
-    marginTop: 20,
-    borderRadius: 12,
-    backgroundColor: '#2DBEB11A',
+    paddingHorizontal: scale(28),
+    paddingVertical: scale(16),
+    marginTop: scale(20),
+    borderRadius: scale(12),
+    backgroundColor: colors.LIGHT_GREEN,
   },
   summaryTextContainer: {flexDirection: 'column', alignItems: 'flex-start'},
   summaryTitleText: {
-    fontWeight: '900',
-    color: '#1F2937',
+    fontFamily: Fonts.BOLD,
+    color: colors.INDIGO,
     fontSize: Size.font_18,
   },
   summarySubtitleText: {
-    marginTop: 10,
-    fontWeight: 'bold',
-    color: '#1F2937',
+    marginTop: scale(10),
+    fontFamily: Fonts.BOLD,
+    color: colors.DARK_GRAY,
     opacity: 0.6,
     fontSize: Size.font_18,
   },
   summaryValueContainer: {flexDirection: 'column'},
   summaryValueText: {
-    fontWeight: '900',
-    color: '#10B981',
+    fontFamily: Fonts.BOLD,
+    color: colors.GREEN,
     fontSize: Size.font_18,
-    marginTop: 2,
+    marginTop: scale(2),
   },
   summaryDaysText: {
-    fontWeight: '900',
-    color: '#10B981',
-    fontSize: 18,
-    marginTop: 2,
+    fontFamily: Fonts.BOLD,
+    color: colors.GREEN,
+    fontSize: scale(18),
+    marginTop: scale(2),
     fontSize: Size.font_18,
   },
   sidebar: {
     position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    width: 256,
-    backgroundColor: '#FAFAFA',
+    right: scale(0),
+    top: scale(0),
+    bottom: scale(0),
+    width: scale(256),
+    backgroundColor: Colors.CREAM_WHITE,
     borderLeftWidth: 1,
-    borderLeftColor: 'gray',
-    padding: 20,
+    borderLeftColor: colors.WHITE,
+    padding: scale(20),
     zIndex: 50,
   },
-  sidebarHeader: {flexDirection: 'row', alignItems: 'center', marginBottom: 20},
-  sidebarHeadersub: {flexDirection: 'col', top: 4},
-  profileImage: {width: 55, height: 55, borderRadius: 24, marginRight: 18},
-  profileName: {fontSize: Size.font_18, fontWeight: 'bold', color: '#472966'},
+  sidebarHeader: {flexDirection: 'row', alignItems: 'center', marginBottom: scale(20)},
+  sidebarHeadersub: {flexDirection: 'col', top: scale(4)},
+  profileImage: {width: scale(55), height: scale(55), borderRadius: scale(24), marginRight: scale(18)},
+  profileName: {
+    fontSize: Size.font_18,
+    fontFamily: Fonts.BOLD,
+    color: colors.PURPLE1,
+  },
   sidebarEdit: {
     fontSize: Size.font_11,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    backgroundColor: '#c9bdda', // Adding background color property
-    top: 3,
-    marginLeft: -5,
+    fontWeight: Weight.semi,
+    borderRadius: scale(10),
+    paddingHorizontal: scale(15),
+    backgroundColor: colors.MID_GRAY,
+    top: scale(3),
+    marginLeft: scale(-5),
   },
-  sidebarItem: {paddingVertical: 8, top: 15},
-  sidebarItemText: {fontSize: 18, color: '#714f92'},
+  sidebarEditText: {color: colors.PURPLE1},
+  sidebarItem: {paddingVertical: scale(8), top: scale(15)},
+  sidebarItemText: {
+    fontSize: Size.font_14,
+    color: colors.PURPLE1,
+    fontFamily: Fonts.BOLD,
+    backgroundColor: colors.WHITE,
+    padding: scale(4),
+    borderRadius: scale(15),
+  },
   popup: {
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    backgroundColor: 'white',
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    shadowColor: 'black',
+    backgroundColor: colors.WHITE,
+    borderTopLeftRadius: scale(32),
+    borderTopRightRadius: scale(32),
+    shadowColor: colors.BLACK,
     shadowOpacity: 0.8,
-    shadowRadius: 100,
-    elevation: 20,
+    shadowRadius: scale(100),
+    elevation: scale(20),
     zIndex: 1000,
   },
   popupContent: {
-    paddingTop: 16,
-    paddingBottom: 64,
-    paddingHorizontal: 16,
-    backgroundColor: 'white',
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    shadowColor: 'black',
+    paddingTop: scale(16),
+    paddingBottom: scale(64),
+    paddingHorizontal: scale(16),
+    backgroundColor: colors.WHITE,
+    borderTopLeftRadius: scale(32),
+    borderTopRightRadius: scale(32),
+    shadowColor: colors.BLACK,
     shadowOpacity: 0.8,
-    shadowRadius: 10,
+    shadowRadius: scale(10),
   },
   popupButtonContainer: {
     display: 'flex',
@@ -431,41 +458,49 @@ const styles = StyleSheet.create({
   },
   doneButton: {
     alignItems: 'center',
-    paddingVertical: 5,
-    backgroundColor: '#4E2973',
-    borderRadius: 24,
+    paddingVertical: scale(5),
+    backgroundColor: colors.PURPLE,
+    borderRadius: scale(24),
     width: '20%',
   },
-  doneButtonText: {color: 'white', fontWeight: 'bold'},
-  popupHeader: {alignItems: 'center', marginBottom: 5},
-  popupHeaderText: {fontSize: 20, fontWeight: 'bold', color: '#222B45'},
+  doneButtonText: {
+    color: colors.WHITE,
+    fontFamily: Fonts.MEDIUM,
+    fontSize: Size.font_16,
+  },
+  popupHeader: {marginLeft: scale(12), marginBottom: scale(5)},
+  popupHeaderText: {
+    fontSize: Size.font_20,
+    fontFamily: Fonts.BOLD,
+    color: '#222B45',
+  },
   popupDateText: {
-    fontSize: 16,
-    color: '#4E2973',
-    fontWeight: '700',
-    marginBottom: 20,
+    fontSize: Size.font_20,
+    color: colors.PURPLE,
+    fontFamily: Fonts.MEDIUM,
+    marginBottom: scale(20),
   },
   attendanceOptionsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: -30,
+    marginBottom: scale(-30),
   },
   attendanceOption: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 12,
-    borderRadius: 24,
-    marginHorizontal: 8,
+    paddingVertical: scale(12),
+    borderRadius: scale(24),
+    marginHorizontal: scale(8),
   },
-  attendanceOptionText: {fontWeight: 'bold'},
+  attendanceOptionText: {fontFamily: Fonts.MEDIUM, fontSize: Size.font_16},
   overlay: {
     position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+
     zIndex: 999,
   },
 });

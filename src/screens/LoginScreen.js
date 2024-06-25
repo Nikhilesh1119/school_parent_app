@@ -8,11 +8,11 @@ import {
   StyleSheet,
 } from 'react-native';
 import Video from 'react-native-video';
-import bgvideo from '../assets/videos/loginBG.mp4';
+import bgvideo from '@src/assets/videos/loginBG.mp4';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet from '@gorhom/bottom-sheet';
-import LoginForm from '../components/LoginForm';
-
+import LoginForm from '@src/components/LoginForm';
+import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
 function useStyles() {
   return StyleSheet.create({
     container: {
@@ -57,16 +57,17 @@ function useStyles() {
     },
     logoText:{
       color: 'white',
-      fontSize: 40,
-      fontWeight: '800',
-      top:10
+      fontSize: Size.font_40,
+      fontWeight: Weight.full,
+      top:10,
+      
 
     },
 
     headerText: {
       color: 'white',
-      fontSize: 24,
-      fontWeight: 'semibold',
+      fontSize: Size.font_24,
+      fontWeight: Weight.low,
       top:10
     },
     subHeaderText: {
@@ -80,7 +81,7 @@ function useStyles() {
 
 function LoginScreen() {
   const styles = useStyles();
-  const snapPoints = useMemo(() => ['60%'], []);
+  const snapPoints = useMemo(() => ['70%'], []);
   const bottomSheetRef = useRef(null);
 
   const handleClosePress = () => {
