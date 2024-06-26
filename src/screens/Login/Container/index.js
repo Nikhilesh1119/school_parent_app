@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 import Video from 'react-native-video';
 import bgvideo from '@src/assets/videos/loginBG.mp4';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet from '@gorhom/bottom-sheet';
-import LoginForm from '@src/screens/Login/Container';
+import LoginForm from '@src/screens/Login/Components/LoginForm';
+
 import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
 import styles from '../Container/styles';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function LoginScreen() {
  

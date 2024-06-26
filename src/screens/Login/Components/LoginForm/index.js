@@ -4,13 +4,13 @@ import { SafeAreaView, TouchableOpacity, View, TextInput, Text, StyleSheet } fro
 import { object, string } from 'yup';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import styles from './styles'
 
 
-import { ROUTE } from '../navigation/contant';
+import { ROUTE } from '@src/navigation/constant';
 
 const LoginForm = () => {
   const navigation = useNavigation();
-  const styles = useStyles();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const userSchemaValidation = object({
