@@ -33,9 +33,7 @@ const AttendanceDashboard = () => {
   ).current;
 
   useEffect(() => {
-    // Fetch or calculate the actual values for totalDaysPresentMonth, totalClassDaysMonth,
-    // totalDaysPresentYear, and totalClassDaysYear here, possibly from a backend or local storage.
-    // The following are just example values for demonstration.
+    
     setTotalDaysPresentMonth(20);
     setTotalDaysPresentYear(150);
 
@@ -274,7 +272,6 @@ const styles = StyleSheet.create({
     color: colors.INDIGO,
     paddingLeft: scale(5),
     marginTop: -scale(-2),
-    // fontFamily:Fonts.BOLD
   },
   dateText: {
     fontSize: Size.font_20,
@@ -337,7 +334,6 @@ const styles = StyleSheet.create({
     fontSize: Size.font_20,
     fontFamily: Fonts.BOLD,
     color: colors.INDIGO,
-    // fontFamily:Fonts.BOLD_ITALIC
   },
   attendanceSubHeaderText: {
     fontSize: Size.font_16,

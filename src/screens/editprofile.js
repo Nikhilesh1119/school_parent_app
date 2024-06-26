@@ -15,7 +15,10 @@ import { scale } from 'react-native-size-matters';
 import Backbutton from "@src/assets/images/Backbutton.png";
 import colors from "@src/theme/colors";
 import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
+import { useNavigation } from "@react-navigation/native";
+import { ROUTE } from "../navigation/constant";
 function EditProfile() {
+  const navigation=useNavigation()
   return (
     <Formik
       initialValues={{
@@ -39,7 +42,7 @@ function EditProfile() {
             <View style={styles.section}>
               <View style={styles.titleContainer}>
                 
-              <Pressable onPress={() => navigation.goBack()}>
+              <Pressable onPress={() => navigation.navigate(ROUTE.PROFILE)}>
                   <Image source={Backbutton} style={styles.backIcon} />
                 </Pressable>
               
@@ -162,7 +165,7 @@ function EditProfile() {
                   onBlur={handleBlur("address")}
                 />
               </View>
-              <Pressable style={styles.updateButton} onPress={handleSubmit}>
+              <Pressable style={styles.updateButton} onPress={() => navigation.navigate("Profile")}>
                 <Text style={styles.updateButtonText}>Update Profile</Text>
               </Pressable>
             </View>
@@ -193,7 +196,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: scale(16),
     width: "100%",
-    maxWidth: width > 768 ? width * 0.8 : "100%",
+    
+   
   },
   section: {
     flexDirection: "column",
@@ -208,12 +212,14 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: scale(20),
+    marginBottom: scale(10),
+    marginTop:scale(15)
   },
   backIcon: {
-    width: scale(20),
-    height: scale(20),
+    width: scale(25),
+    height: scale(25),
     marginRight: scale(10),
+    
   },
   titleText: {
     flex: 1,
@@ -221,13 +227,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerText: {
-    fontSize: scale(Size.font_22),
+    fontSize: Size.font_22,
     color: colors.BLACK,
     fontFamily: Fonts.BOLD,
   },
   sectionHeader: {
     marginTop: scale(32),
-    fontSize: scale(Size.font_22),
+    fontSize: Size.font_22,
     color: colors.BLACK,
     fontFamily: Fonts.MEDIUM,
   },
@@ -246,7 +252,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     flex: 1,
-    fontSize: scale(Size.font_15),
+    fontSize: Size.font_15,
     fontFamily: Fonts.MEDIUM,
   },
   genderContainer: {
@@ -301,7 +307,7 @@ const styles = StyleSheet.create({
   updateButtonText: {
     color: colors.WHITE,
     fontFamily: Fonts.BOLD,
-    fontSize: scale(Size.font_20),
+    fontSize: Size.font_20,
   }
 });
 

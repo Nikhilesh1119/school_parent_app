@@ -58,6 +58,7 @@ export default function ProfileScreen({ navigation }) {
   };
 
   return (
+    
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
       <ImageBackground
         source={background}
