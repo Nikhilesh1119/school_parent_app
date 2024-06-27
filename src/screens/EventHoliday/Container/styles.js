@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
       backgroundColor: colors.WHITE,
       borderRadius: scale(20),
       maxWidth: scale(500),
-      height: scale(300),
     },
     eventsTitle: {
       fontSize: scale(Size.font_20),

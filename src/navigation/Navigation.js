@@ -14,7 +14,7 @@ export default function Navigation() {
       <Stack.Screen
           name={ROUTE.SPLASH}
           options={{ headerShown: false }}
-          component={Splash} // Add this screen
+          component={Splash}
         />
         <Stack.Screen
           name={ROUTE.AUTH}

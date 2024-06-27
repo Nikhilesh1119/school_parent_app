@@ -1,102 +1,158 @@
-import React, { useState } from 'react';
-import { Formik } from 'formik';
-import { SafeAreaView, TouchableOpacity, View, TextInput, Text, StyleSheet } from 'react-native';
-import { object, string } from 'yup';
+import {useContext, useState} from 'react';
+import {Formik} from 'formik';
+import {useNavigation} from '@react-navigation/native';
+import logo from '@src/assets/images/logo.png';
+import {
+  TouchableOpacity,
+  View,
+  TextInput,
+  Text,
+  ToastAndroid,
+  KeyboardAvoidingView,
+  Image,
+} from 'react-native';
+import {object, string} from 'yup';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
-import styles from './styles'
+import {AuthContext} from '@src/context/AuthContext';
+import {axiosClient} from '@src/services/axiosClient';
+import {styles} from './styles';
+import {ROUTE} from '@src/navigation/constant';
 
-
-import { ROUTE } from '@src/navigation/constant';
-
-const LoginForm = () => {
-  const navigation = useNavigation();
+export default function LoginForm() {
+  const {login} = useContext(AuthContext);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
+  const navigation = useNavigation();
   const userSchemaValidation = object({
-    email: string().email('Invalid email').required('Email is required'),
     password: string()
-      .min(4, 'password must have at least 4 characters')
-      .max(8, 'password can have at most 8 characters')
+      .min(8, 'password must have at least 8 characters')
       .required('password is required'),
   });
 
-  const handlePasswordVisibility = () => {
+  const handlePasswordVisibility = e => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.innerContainer}>
-        <Formik
-          initialValues={{ email: '', password: '' }}
-          validationSchema={userSchemaValidation}
-          onSubmit={values => {
-            navigation.navigate(ROUTE.TAB);
-          }}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-          }) => (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <Formik
+        initialValues={{
+          user: '',
+          password: '',
+        }}
+        validationSchema={userSchemaValidation}
+        onSubmit={async values => {
+          try {
+            console.log(values);
+            const res = await axiosClient.post('/parent/login', {
+              user: values.user,
+              password: values.password,
+            });
+            console.log(res.data);
+            if (res.data.result) {
+              ToastAndroid.show(
+                'Login Successful',
+                ToastAndroid.TOP,
+                ToastAndroid.LONG,
+              );
+              setTimeout(() => {
+                // console.log(res.data.result);
+                login(res.data.result.accessToken);
+                navigation.navigate(ROUTE.UPDATE_PASSWORD);
+            // navigation.navigate(ROUTE.TAB); 
+                // navigation.navigate(ROUTE.TAB);
+              }, 2000);
+            } else {
+              ToastAndroid.show(
+                res.data.message,
+                ToastAndroid.LONG,
+                ToastAndroid.TOP,
+              );
+            }
+          } catch (error) {}
+        }}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+          resetForm,
+        }) => {
+          return (
             <View style={styles.formContainer}>
-              <View style={styles.headerContainer}>
-                <Text style={styles.welcomeText}>Welcome, </Text>
-                <Text style={styles.loginText}>Login Here</Text>
+              <View style={styles.logoContainer}>
+                <Image source={logo} alt="" style={styles.logo} />
+                <Text style={styles.logoText}>Logo</Text>
               </View>
-              <View>
-                <View>
-                  <Text style={styles.label}>Email</Text>
+              <View style={styles.infocontainer}>
+                <View style={styles.welcomeContainer}>
+                  <Text style={styles.welcomeTextPrimary}>Welcome, </Text>
+                  <Text style={styles.welcomeTextSecondary}>Login Here</Text>
+                </View>
+                <Text style={styles.description}>
+                  Enter your credentials to get access to your account.
+                </Text>
+                <View style={styles.inputContainer}>
+                  <Text style={styles.inputLabel}>
+                    Phone, email or username
+                  </Text>
                   <TextInput
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    value={values.email}
+                    onChangeText={handleChange('user')}
+                    onBlur={handleBlur('user')}
+                    value={values.user}
                     style={styles.input}
-                    placeholder="abc@gmail.com"
+                    placeholder="Email / Phone / Username"
+                    placeholderTextColor={'black'}
                   />
-                  {touched.email && errors.email && (
-                    <Text style={styles.errorText}>{errors.email}</Text>
+                  {touched.user && errors.user && (
+                    <Text style={styles.errorText}>{errors.user}</Text>
                   )}
                 </View>
-                <View style={{ marginTop: 16 }}>
-                  <View>
-                    <Text style={styles.label}>Password</Text>
-                    <View style={styles.passwordContainer}>
-                      <TextInput
-                        onChangeText={handleChange('password')}
-                        onBlur={handleBlur('password')}
-                        value={values.password}
-                        style={styles.passwordInput}
-                        placeholder="Enter Your Password"
-                        secureTextEntry={!isPasswordVisible}
-                      />
-                      <TouchableOpacity
-                        style={styles.iconContainer}
-                        onPress={handlePasswordVisibility}>
-                        <Icon name={isPasswordVisible ? 'eye' : 'eye-slash'} size={22} color="black" />
-                      </TouchableOpacity>
-                    </View>
+                <View style={styles.inputContainer}>
+                  <Text style={styles.inputLabel}>Password</Text>
+                  <View style={styles.passwordInputContainer}>
+                    <TextInput
+                      onChangeText={handleChange('password')}
+                      onBlur={handleBlur('password')}
+                      value={values.password}
+                      style={styles.passwordInput}
+                      placeholder="Enter Your Password"
+                      placeholderTextColor={'black'}
+                      secureTextEntry={!isPasswordVisible}
+                    />
+                    <TouchableOpacity
+                      style={styles.passwordVisibilityToggle}
+                      onPress={handlePasswordVisibility}>
+                      {isPasswordVisible ? (
+                        <Icon name="eye" size={22} color="black" />
+                      ) : (
+                        <Icon name="eye-slash" size={22} color="black" />
+                      )}
+                    </TouchableOpacity>
                   </View>
                   {touched.password && errors.password && (
                     <Text style={styles.errorText}>{errors.password}</Text>
                   )}
                 </View>
-                <TouchableOpacity style={{ marginTop: 8 }}>
-                  <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('ForgotPassword')}>
+                  <Text style={styles.forgotPasswordText}>
+                    Forgot Password?
+                  </Text>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                <Text style={styles.submitButtonText}>Submit</Text>
+              <TouchableOpacity
+                style={styles.loginButton}
+                onPress={handleSubmit}>
+                <Text style={styles.loginButtonText}>Login</Text>
               </TouchableOpacity>
             </View>
-          )}
-        </Formik>
-      </View>
-    </SafeAreaView>
+          );
+        }}
+      </Formik>
+    </KeyboardAvoidingView>
   );
-};
-
-export default LoginForm;
+}

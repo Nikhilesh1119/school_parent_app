@@ -53,8 +53,7 @@ function LoginScreen() {
             enablePanDownToClose={true}
             snapPoints={snapPoints}
             index={-1}
-            ref={bottomSheetRef}
-            backgroundStyle={{ borderRadius: 50 }}>
+            ref={bottomSheetRef}>
             <View style={styles.contentContainer}>
               <LoginForm />
             </View>
