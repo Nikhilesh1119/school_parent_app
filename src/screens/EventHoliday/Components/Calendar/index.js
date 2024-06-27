@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import colors from '@src/theme/colors';
 import { scale } from 'react-native-size-matters';
-
+import styles from './styles';
 const MyCalendar = () => {
   const [selectedDate, setSelectedDate] = useState('');
 
@@ -20,6 +20,7 @@ const MyCalendar = () => {
         disableMonthChange={true}
         disableAllTouchEventsForDisabledDays={true}
         enableSwipeMonths={true}
+        renderHeader={() => null}
         theme={{
           backgroundColor: colors.WHITE,
           calendarBackground: colors.WHITE,
@@ -52,16 +53,6 @@ const MyCalendar = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.WHITE,
-    borderBottomLeftRadius: scale(30), // Border radius at top-left
-    borderBottomRightRadius: scale(30),
-    overflow: 'hidden', // Ensure border radius is respected
-    
-    
-  },
-});
+
 
 export default MyCalendar;

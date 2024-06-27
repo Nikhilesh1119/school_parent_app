@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
-import DashboardScreen from '@src/screens/DashboardScreen';
+import DashboardScreen from '@src/screens/Dashboard/Container/index';
 import ProfileStackNavigator from '@src/navigation/ProfileStackNavigator';
-import Eventholiday from '@src/screens/eventholiday';
+import Eventholiday from '@src/screens/EventHoliday/Container/index';
 import Dashicon from '@src/assets/images/Dashicon.png';
 import Calendaricon from '@src/assets/images/Calendaricon.png';
-import Profileicon from '@src/assets/images/Profileicon.png';
+import Profileicon from '@src/assets/images/Profileicon.jpeg';
 import { scale } from 'react-native-size-matters';
 import { ROUTE } from './constant';
-import colors from '../theme/colors';
+import colors from '@src/theme/colors';
 
 
 

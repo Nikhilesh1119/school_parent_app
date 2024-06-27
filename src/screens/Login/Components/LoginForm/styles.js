@@ -2,7 +2,7 @@ import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
 import {StyleSheet} from 'react-native';
 import colors from '@src/theme/colors';
 
-const styles = StyleSheet.create({
+ const styles = StyleSheet.create({
     container: {
         minHeight: '100%',
       },
@@ -91,3 +91,4 @@ const styles = StyleSheet.create({
         fontWeight: '600',
       },
 })
+export default styles;
