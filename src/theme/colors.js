@@ -27,6 +27,7 @@ const colors = {
   BLUE:'#RFRFERE',
 
   INDIGO:'rgba(15, 6, 22, 1)',
+  DARK_BLUE:'rgba(34, 43, 69, 1)',
   PURPLE:'rgba(78, 41, 115, 1)',
   LIGHT_PURPLE:'rgba(78, 41, 115, 0.5)',
   LIGHT_GREEN:'rgba(45, 190, 177, 0.1),',

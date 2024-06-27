@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     popupHeaderText: {
       fontSize: Size.font_20,
       fontFamily: Fonts.BOLD,
-      color: '#222B45',
+      color: colors.DARK_BLUE,
     },
     popupDateText: {
       fontSize: Size.font_20,
@@ -245,7 +245,6 @@ const styles = StyleSheet.create({
       bottom: 0,
       left: 0,
       right: 0,
-  
       zIndex: 999,
     },
   });

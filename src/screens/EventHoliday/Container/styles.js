@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
       
     },
     headerSubtitle: {
-      fontSize: scale(Size.font_20),
+      fontSize: scale(Size.font_17),
       fontFamily: Fonts.BOLD,
       color: colors.LIGHT_PURPLE,
       marginTop: scale(2),
