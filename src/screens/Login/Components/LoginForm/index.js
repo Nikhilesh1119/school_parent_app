@@ -44,32 +44,32 @@ export default function LoginForm() {
         validationSchema={userSchemaValidation}
         onSubmit={async values => {
           try {
-            // console.log(values);
-            // const res = await axiosClient.post('/parent/login', {
-            //   user: values.user,
-            //   password: values.password,
-            // });
-            // console.log(res.data);
-            // if (res.data.result) {
-            //   ToastAndroid.show(
-            //     'Login Successful',
-            //     ToastAndroid.TOP,
-            //     ToastAndroid.LONG,
-            //   );
-            //   setTimeout(() => {
-            //     // console.log(res.data.result);
-            //     login(res.data.result.accessToken);
-            //     navigation.navigate(ROUTE.UPDATE_PASSWORD);
-            navigation.navigate(ROUTE.TAB);
-            //     // navigation.navigate(ROUTE.TAB);
-            //   }, 2000);
-            // } else {
-            //   ToastAndroid.show(
-            //     res.data.message,
-            //     ToastAndroid.LONG,
-            //     ToastAndroid.TOP,
-            //   );
-            // }
+            console.log(values);
+            const res = await axiosClient.post('/parent/login', {
+              user: values.user,
+              password: values.password,
+            });
+            console.log(res.data);
+            if (res.data.result) {
+              ToastAndroid.show(
+                'Login Successful',
+                ToastAndroid.TOP,
+                ToastAndroid.LONG,
+              );
+              setTimeout(() => {
+                // console.log(res.data.result);
+                login(res.data.result.accessToken);
+                navigation.navigate(ROUTE.UPDATE_PASSWORD);
+            // navigation.navigate(ROUTE.TAB); 
+                // navigation.navigate(ROUTE.TAB);
+              }, 2000);
+            } else {
+              ToastAndroid.show(
+                res.data.message,
+                ToastAndroid.LONG,
+                ToastAndroid.TOP,
+              );
+            }
           } catch (error) {}
         }}>
         {({
