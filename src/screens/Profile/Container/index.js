@@ -13,18 +13,16 @@ import {
   ImageBackground,
 } from 'react-native';
 
-import profileback from '../assets/images/profileback.png';
-import background from '../assets/images/background.png';
-import contact from '../assets/images/contact.png';
-import editprofile from '../assets/images/editprofile.png';
-import laguage from '../assets/images/laguage.png';
-import mode from '../assets/images/mode.png';
-import help from '../assets/images/help.png';
-import downarrow from '../assets/images/downarrow.png';
 
+import background from '@src/assets/images/background.png';
+import contact from '@src/assets/images/contact.png';
+import editprofile from '@src/assets/images/editprofile.png';
+import laguage from '@src/assets/images/laguage.png';
+import mode from '@src/assets/images/mode.png';
+import help from '@src/assets/images/help.png';
+import downarrow from '@src/assets/images/downarrow.png';
 import { useTranslation } from 'react-i18next';
-import { Colors, Fonts, Size } from '@src/theme/fonts';
-import { scale } from 'react-native-size-matters';
+import styles from './styles';
 
 export default function ProfileScreen({ navigation }) {
   const [form, setForm] = useState({
@@ -58,9 +56,10 @@ export default function ProfileScreen({ navigation }) {
   };
 
   return (
+    
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
       <ImageBackground
-        source={profileback}
+        source={background}
         resizeMode="stretch"
         style={styles.image}
       >
@@ -232,195 +231,3 @@ export default function ProfileScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  image: {
-    position: 'relative',
-    flex: 0.5,
-  },
-  header: {
-    paddingLeft: 24,
-    paddingRight: 24,
-    marginBottom: 12,
-    marginTop: 20,
-  },
-  pickerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 110,
-  },
-  pickerTouchable: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: 'transparent',
-    padding: 10,
-    borderBottomWidth: 1,
-   
-  },
-  selectedStudent: {
-    color: 'white',
-    fontSize: 18,
-    marginRight: 10,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 16,
-  },
-  profile: {
-    alignItems: 'center',
-    marginTop: 30,
-    marginBottom: 35,
-    position: 'absolute',
-    top: '30%', // Adjust the position to move the avatar up
-    left: '22%',
-    zIndex: 2,
-  },
-  profileAvatar: {
-    width: 150,
-    height: 150,
-    borderRadius: 100,
-  },
-  profileName: {
-    marginTop: scale(25),
-    fontSize: Size.font_20,
-    // fontWeight: '600',
-    fontFamily:Fonts.BOLD,
-    color: Colors.BLACK,
-    borderRadius: scale(8),
-  },
-  profileEmail: {
-    fontSize: 16,
-    fontWeight: '400',
-    color: 'black',
-  },
-  scrollViewContent: {
-    position:'absolute', top: 100,
-    width: '100%'
-  },
-  section: {
-    paddingTop: 15,
-  },
-  sectionTitle: {
-    marginVertical: 8,
-    marginHorizontal: 24,
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#a7a7a7',
-    textTransform: 'uppercase',
-    letterSpacing: 1.2,
-  },
-  sectionBody: {
-    paddingLeft: 20,
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#e3e3e3',
-    borderRadius: 20,
-    marginLeft: 15,
-    marginRight: 15,
-    shadowColor: 'purple',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 3,
-    elevation: 5,
-    marginBottom:5
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingRight: 16,
-    height: 50,
-  },
-  rowWrapper: {
-    borderTopWidth: 1,
-    borderColor: '#e3e3e3',
-  },
-  rowFirst: {
-    borderTopWidth: 0,
-  },
-  rowIcon: {
-    width: 30,
-    height: 30,
-    borderRadius: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 12,
-  },
-  rowLabel: {
-    fontSize: 17,
-    fontWeight: '500',
-    color: '#000',
-  },
-  rowSpacer: {
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,
-  },
-  rowValue: {
-    fontSize: 17,
-    fontWeight: '500',
-    color: '#8B8B8B',
-    marginRight: 4,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'flex-end', // Align items to the bottom
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    width: '100%',
-    padding: 20,
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    elevation: 5,
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    marginBottom: 10,
-    textAlign: 'center',
-    color:"black"
-  },
-  languageOption: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-  },
-  languageText: {
-    fontSize: 16,
-    color: '#333',
-  },
-});
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 18,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    color: 'white',
-    paddingRight: 30, // Ensure the text is never behind the icon
-    width: 200, // Adjust the width of the picker
-  },
-  inputAndroid: {
-    fontSize: 18,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
-    
-    borderRadius: 8,
-    color: 'white',
-    paddingRight: 15, // Ensure the text is never behind the icon
-    width: 150, // Adjust the width of the picker
-  },
-  iconContainer: {
-    top: 12,
-    right: 12,
-  },
-});

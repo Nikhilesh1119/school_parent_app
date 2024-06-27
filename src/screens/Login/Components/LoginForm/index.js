@@ -4,93 +4,13 @@ import { SafeAreaView, TouchableOpacity, View, TextInput, Text, StyleSheet } fro
 import { object, string } from 'yup';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import styles from './styles'
 
-const useStyles = () => {
-  return StyleSheet.create({
-    container: {
-      minHeight: '100%',
-    },
-    innerContainer: {
-      paddingHorizontal: 20,
-      backgroundColor: 'white',
-      borderTopLeftRadius: 50,
-      borderTopRightRadius: 50,
-    },
-    formContainer: {
-      paddingHorizontal: 15,
-      height: '100%',
-    },
-    headerContainer: {
-      flexDirection: 'row',
-      maxHeight: 48,
-      alignItems: 'center',
-    },
-    welcomeText: {
-      fontSize: 24,
-      color: '#F97316', // Equivalent to 'text-orange-600'
-    },
-    loginText: {
-      fontSize: 24,
-      color: 'black',
-    },
-    label: {
-      fontSize: 18,
-      color: '#7b7c7b',
-    },
-    input: {
-      borderColor: '#e5e7e6',
-      borderWidth: 1,
-      borderRadius: 10,
-      paddingHorizontal: 16,
-      fontSize: 16,
-      color: 'black',
-    },
-    errorText: {
-      color: '#DC2626', // Equivalent to 'text-red-600'
-    },
-    passwordContainer: {
-      borderColor: '#e5e7e6',
-      borderWidth: 1,
-      borderRadius: 10,
-      flexDirection: 'row',
-      alignItems: 'center',
-      height: 48,
-    },
-    passwordInput: {
-      borderRadius: 10,
-      width: '83.33%', // Equivalent to 'w-5/6'
-      paddingHorizontal: 16,
-      fontSize: 16,
-      color: 'black',
-    },
-    iconContainer: {
-      height: 48,
-      width: '16.67%', // Equivalent to 'w-1/6'
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    forgotPasswordText: {
-      color: '#1F2937', // Equivalent to 'text-gray-900'
-      textAlign: 'right',
-    },
-    submitButton: {
-      marginTop: 48,
-      backgroundColor: '#6B21A8', // Equivalent to 'bg-purple-700'
-      paddingVertical: 12,
-      borderRadius: 25,
-      alignItems: 'center',
-    },
-    submitButtonText: {
-      fontSize: 18,
-      color: 'white',
-      fontWeight: '600',
-    },
-  });
-};
+
+import { ROUTE } from '@src/navigation/constant';
 
 const LoginForm = () => {
   const navigation = useNavigation();
-  const styles = useStyles();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const userSchemaValidation = object({
@@ -112,7 +32,7 @@ const LoginForm = () => {
           initialValues={{ email: '', password: '' }}
           validationSchema={userSchemaValidation}
           onSubmit={values => {
-            navigation.navigate('Home');
+            navigation.navigate(ROUTE.TAB);
           }}>
           {({
             handleChange,
