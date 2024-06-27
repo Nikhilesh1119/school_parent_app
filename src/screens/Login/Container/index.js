@@ -47,7 +47,7 @@ function LoginScreen() {
           <TouchableOpacity
             style={styles.swipeContainer}
             onPress={handleOpenPress}>
-            <Text style={styles.swipeText}>Click to Login</Text>
+            <Text style={styles.swipeText}>Tap to Login</Text>
           </TouchableOpacity>
           <BottomSheet
             enablePanDownToClose={true}

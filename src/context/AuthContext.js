@@ -16,8 +16,6 @@ export const AuthProvider = ({children}) => {
         }
       } catch (e) {
         console.log('Login error', e);
-      } finally {
-        setIsLoading(false);
       }
     };
     isLogin();

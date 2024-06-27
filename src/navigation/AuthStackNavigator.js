@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoginScreen from '@src/screens/Login/Container/index';
 import UpdatePassword from '@src/screens/Login/Components/UpdatePassword/index';
 import {ROUTE} from '@src/navigation/constant';
-
+import ParentUpdate from '@src/screens/Parentupdate';
 const Stack = createNativeStackNavigator();
 
 export default function AuthStackNavigator() {
@@ -17,6 +17,11 @@ export default function AuthStackNavigator() {
         name={ROUTE.UPDATE_PASSWORD}
         options={{headerShown: false}}
         component={UpdatePassword}
+      />
+      <Stack.Screen
+        name={ROUTE.PARENT_EDIT}
+        options={{headerShown: false}}
+        component={ParentUpdate}
       />
     </Stack.Navigator>
   );

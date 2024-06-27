@@ -14,7 +14,7 @@ export default function Splash() {
   // };
 
   useEffect(() => {
-    if (accessToken === null) {
+    if (accessToken===null) {
       navigation.replace(ROUTE.AUTH);
     } else {
       navigation.replace(ROUTE.TAB);

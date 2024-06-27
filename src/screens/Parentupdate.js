@@ -1,6 +1,10 @@
 import * as React from "react";
 import { View, StyleSheet, Image, Text, TextInput, Pressable } from "react-native";
 
+import colors from '@src/theme/colors';
+import { Size, Weight, Colors, Fonts } from '@src/theme/fonts';
+import { scale } from 'react-native-size-matters';
+
 function ParentUpdate() {
   const [email, setEmail] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
@@ -94,73 +98,73 @@ function ParentUpdate() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
-    paddingHorizontal: 16,
+    marginTop: scale(30),
+    paddingHorizontal: scale(16),
   },
   section: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: scale(20),
   },
   sectionTitle: {
-    fontSize: 22,
-    fontWeight: "700",
-    marginLeft: 40,
-    marginBottom:20
+    fontSize: Size.font_24,
+    fontFamily:Fonts.MEDIUM,
+    marginLeft: scale(40),
+    marginBottom:scale(20)
   },
   image: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
+    width: scale(24),
+    height: scale(24),
+    marginRight: scale(10),
   },
   inputContainer: {
-    marginBottom: 20,
-    color: "#FFFFF0",
+    marginBottom: scale(20),
+    color: colors.LIGHT_YELLOW,
   },
   label: {
-    fontSize: 18,
-    fontWeight: "700",
-    marginBottom: 8,
+    fontSize: Size.font_20,
+    fontFamily:Fonts.MEDIUM,
+    marginBottom: scale(8),
   },
   description: {
-    fontSize: 14,
-    color: "rgba(15, 6, 22, 0.7)",
-    marginBottom: 15,
+    fontSize: Size.font_16,
+    color: colors.GRAY,
+    marginBottom: scale(15),
   },
   input: {
-    borderWidth: 1,
-    borderColor: "rgba(78, 41, 115, 0.5)",
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    marginBottom: 15,
-    fontSize: 16,
+    borderWidth: scale(1),
+    borderColor: colors.MODERATE_PURPLE,
+    borderRadius: scale(10),
+    paddingVertical: scale(12),
+    paddingHorizontal: scale(16),
+    marginBottom: scale(15),
+    fontSize: Size.fonts_16,
   },
   updateButton: {
-    borderRadius: 14,
-    borderColor: "rgba(78, 41, 115, 0.5)",
-    borderWidth: 1,
-    backgroundColor: "#FFF",
+    borderRadius: scale(14),
+    borderColor:colors.MODERATE_PURPLE ,
+    borderWidth: scale(1),
+    backgroundColor: colors.WHITE,
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 18,
-    marginBottom: 15,
+    paddingVertical: scale(18),
+    marginBottom: scale(15),
   },
   updateButtonText: {
-    color: "#0F0616",
-    fontWeight: "700",
+    color: colors.BLACK,
+    fontFamily:Fonts.MEDIUM
   },
   saveButton: {
     borderRadius: 40,
-    backgroundColor: "#4E2973",
+    backgroundColor: colors.PURPLE,
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 18,
+    paddingVertical: scale(18),
   },
   saveButtonText: {
-    color: "#FFFFF0",
-    fontSize: 18,
-    fontWeight: "900",
+    color: colors.LIGHT_YELLOW,
+    fontSize: Size.fonts_20,
+    fontFamily:Fonts.BOLD,
   },
 });
 

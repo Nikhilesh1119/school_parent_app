@@ -53,7 +53,7 @@ const colors = {
   RED: '#FF0000',
   PURPLE: '#33005B',
   DARKGRAY:'gray',
-
+  LIGHT_YELLOW:'rgb(255,255,240)',
   COLOR_1: 'rgba(78, 41, 115, 1)',
   COLOR_2: '#D91111',
   COLOR_3: '#2DBEB1',
@@ -69,6 +69,7 @@ const colors = {
 
   BORDER: '#ccc',
   GRAYBACK:'#f0f0f0',
+  GRAY_WHITE:'rgba(250, 250, 250, 1)',
 
   INDIGO:'rgba(15, 6, 22, 1)',
   DARK_BLUE:'rgba(34, 43, 69, 1)',
@@ -79,7 +80,7 @@ const colors = {
   GRAY:'rgba(15, 6, 22, 0.5)',
   RED:'rgba(217, 17, 17, 1)',
   PURPLE1:'rgba(78, 41, 115, 1)',
-  LIGHT_GRAY:'rgba(0, 0, 0, 1)',
+  LIGHT_GRAY:'rgb(223,225,229)',
   CREAM_WHITE:'rgba(250, 250, 250, 1)',
   PURPLE11:'rgba(78, 41, 115, 0.11)',
   Gray1:'rgba(15, 6, 22, 1)',
@@ -91,7 +92,9 @@ const colors = {
   LIGHT_RED:'rgba(217, 17, 17, 0.05)',
   LIGHT_INDIGO:'rgba(78, 41, 115, 0.05)',
   MID_PURPLE:'rgb(245,240,251)',
-  OFF_WHITE:'rgb(250,250,250)'
+  OFF_WHITE:'rgb(250,250,250)',
+  MODERATE_PURPLE:'rgba(78, 41, 115, 0.5)'
+
 };
 
 export default colors;
