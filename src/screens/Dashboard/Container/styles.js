@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
       borderRadius: scale(24),
       marginHorizontal: scale(8),
     },
-    attendanceOptionText: {fontFamily: Fonts.MEDIUM, fontSize: Size.font_16},
+    attendanceOptionText: {fontFamily: Fonts.BOLD, fontSize: Size.font_16},
     overlay: {
       position: 'absolute',
       top: 0,
