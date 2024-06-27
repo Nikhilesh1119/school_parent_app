@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
       
     },
     headerSubtitle: {
-      fontSize: scale(Size.font_20),
+      fontSize: scale(Size.font_17),
       fontFamily: Fonts.BOLD,
       color: colors.LIGHT_PURPLE,
       marginTop: scale(2),
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
       backgroundColor: colors.WHITE,
       borderRadius: scale(20),
       maxWidth: scale(500),
-      height: scale(300),
     },
     eventsTitle: {
       fontSize: scale(Size.font_20),

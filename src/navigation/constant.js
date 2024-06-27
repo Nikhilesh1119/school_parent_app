@@ -8,5 +8,6 @@ export const ROUTE={
     "PROFILE_SCREEN":"ProfileScreen",
     "UPDATE_PASSWORD":"UpdatePassword",
     "AUTH":"Auth",
-    "TAB":"Tab"
+    "TAB":"Tab",
+    "PARENT_EDIT":"Parent_Edit"
 }

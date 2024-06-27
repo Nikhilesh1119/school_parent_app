@@ -1,7 +1,7 @@
 import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
 import {StyleSheet} from 'react-native';
 import {colors} from '@src/theme/colors';
-
+import { scale } from 'react-native-size-matters';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingBottom: 50,
+        paddingBottom: scale(50),
       },
       swipeContainer: {
         alignItems: 'center',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: Size.font_40,
         fontWeight: Weight.full,
-        top:10,
+        top:scale(10),
         
   
       },
@@ -56,13 +56,13 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: Size.font_24,
         fontWeight: Weight.low,
-        top:10
+        top:scale(20)
       },
       subHeaderText: {
         color: 'white',
-        fontSize: 24,
+        fontSize: Size.font_24,
         fontWeight: 'semibold',
-        top:8
+        top:scale(14)
       },
 
 })
