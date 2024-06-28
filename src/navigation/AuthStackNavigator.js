@@ -3,6 +3,7 @@ import LoginScreen from '@src/screens/Login/Container/index';
 import UpdatePassword from '@src/screens/Login/Components/UpdatePassword/index';
 import {ROUTE} from '@src/navigation/constant';
 import ParentUpdate from '@src/screens/Parentupdate';
+import ParentPassword from '../screens/ParentPassword';
 const Stack = createNativeStackNavigator();
 
 export default function AuthStackNavigator() {
@@ -22,6 +23,11 @@ export default function AuthStackNavigator() {
         name={ROUTE.PARENT_EDIT}
         options={{headerShown: false}}
         component={ParentUpdate}
+      />
+       <Stack.Screen
+        name={ROUTE.PARENT_PRIVACY}
+        options={{headerShown: false}}
+        component={ParentPassword}
       />
     </Stack.Navigator>
   );

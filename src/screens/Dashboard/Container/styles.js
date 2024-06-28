@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.BOLD,
     color: colors.INDIGO,
     paddingLeft: scale(5),
-    marginTop: -scale(-2),
+    marginTop: scale(-2),
   },
   dateText: {
     fontSize: Size.font_20,

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
       flex: 0.5,
     },
     header: {
-      paddingLeft: scale(24),
+      paddingLeft: scale(14),
       paddingRight: scale(24),
       marginBottom: scale(12),
       marginTop: scale(20),
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     selectedStudent: {
       color: colors.WHITE,
       fontSize: Size.font_18,
-      marginRight: scale(10),
+      marginRight: scale(12),
       fontFamily: Fonts.BOLD,
     },
    

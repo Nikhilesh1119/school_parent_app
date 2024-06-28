@@ -16,7 +16,7 @@ import Calendar from '@src/screens/Dashboard/Components/Calendar/index'; // Assu
 import colors from '@src/theme/colors';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/Ionicons'; // Add this line to import the Icon component
-import Navigation from '../../../navigation/Navigation';
+
 import { useNavigation } from '@react-navigation/native';
 import { ROUTE } from '../../../navigation/constant';
 const AttendanceDashboard = () => {

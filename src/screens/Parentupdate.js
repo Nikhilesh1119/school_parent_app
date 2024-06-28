@@ -1,14 +1,19 @@
-import * as React from "react";
-import { View, StyleSheet, Image, Text, TextInput, Pressable } from "react-native";
+import React, { useState } from 'react';
+import { View, StyleSheet, Image, Text, TextInput, Pressable } from 'react-native';
 
 import colors from '@src/theme/colors';
 import { Size, Weight, Colors, Fonts } from '@src/theme/fonts';
 import { scale } from 'react-native-size-matters';
+import Backbutton from '../assets/images/Backbutton.png';
+import Path2 from '../assets/images/Path2.png';
+import Email from '../assets/images/Email.png';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTE } from '../navigation/constant';
 
 function ParentUpdate() {
-  const [email, setEmail] = React.useState("");
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const navigation=useNavigation();
   const handleEmailChange = (text) => {
     setEmail(text);
   };
@@ -23,9 +28,7 @@ function ParentUpdate() {
       <View style={styles.section}>
         <Image
           resizeMode="contain"
-          source={{
-            uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/31fdcf36ef7c35c6aff84728b376cb10ff05976bc9d122d530994faee5dbcc83?apiKey=5571847fc48447bbad48faecb3b890d9&",
-          }}
+          source={Backbutton}
           style={styles.image}
         />
         <Text style={styles.sectionTitle}>Privacy and Security</Text>
@@ -35,56 +38,49 @@ function ParentUpdate() {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Your Email</Text>
         <Text style={styles.description}>Add or update email address here</Text>
-        <Image
-          resizeMode="contain"
-          source={{
-            uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/9ad63655cdb143a02254e7e67cfd8b26354f89953085d307a4fe09ccc925b43a?apiKey=5571847fc48447bbad48faecb3b890d9&",
-          }}
-          style={styles.image}
-        />
-        <TextInput
-          style={styles.input}
-          value={email}
-          onChangeText={handleEmailChange}
-          placeholder="Enter your email"
-          keyboardType="email-address"
-        />
+        <View style={styles.inputWithIcon}>
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={handleEmailChange}
+            placeholder="Enter your email"
+            keyboardType="email-address"
+          />
+          <Image
+            resizeMode="contain"
+            source={Email}
+            style={styles.inputIcon}
+          />
+        </View>
       </View>
 
       {/* Phone Number Section */}
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Phone Number</Text>
         <Text style={styles.description}>Add or update phone number here</Text>
-        <Image
-          resizeMode="contain"
-          source={{
-            uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/65942aacc5820d5683e5f3d3adac4fc25b8994ea570a4828cff813e54c880bf5?apiKey=5571847fc48447bbad48faecb3b890d9&",
-          }}
-          style={styles.image}
-        />
-        <TextInput
-          style={styles.input}
-          value={phoneNumber}
-          onChangeText={handlePhoneNumberChange}
-          placeholder="Enter your phone number"
-          keyboardType="phone-pad"
-        />
+        <View style={styles.inputWithIcon}>
+          <TextInput
+            style={styles.input}
+            value={phoneNumber}
+            onChangeText={handlePhoneNumberChange}
+            placeholder="Enter your phone number"
+            keyboardType="phone-pad"
+          />
+        </View>
       </View>
 
       {/* Change Password Section */}
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Change Password</Text>
         <Text style={styles.description}>Update your password here</Text>
-        <Pressable style={styles.updateButton}>
+        <Pressable style={styles.updateButton}  onPress={()=>navigation.navigate(ROUTE.PARENT_PRIVACY)}>
           <Text style={styles.updateButtonText}>Tap to update</Text>
+          <Image
+            resizeMode="contain"
+            source={Path2}
+            style={styles.buttonIcon}
+          />
         </Pressable>
-        <Image
-          resizeMode="contain"
-          source={{
-            uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/eaaf2134dc0b083a7ffeb3b0a0670c049e332a28cb17dfbf64d1b860e401c4d6?apiKey=5571847fc48447bbad48faecb3b890d9&",
-          }}
-          style={styles.image}
-        />
       </View>
 
       {/* Save Button */}
@@ -108,51 +104,77 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: Size.font_24,
-    fontFamily:Fonts.MEDIUM,
-    marginLeft: scale(40),
-    marginBottom:scale(20)
+    fontFamily: Fonts.BOLD,
+    marginLeft: scale(30),
+    marginBottom: scale(20),
+    color: colors.INDIGO,
   },
   image: {
     width: scale(24),
     height: scale(24),
     marginRight: scale(10),
+    marginTop: scale(-15),
   },
   inputContainer: {
     marginBottom: scale(20),
-    color: colors.LIGHT_YELLOW,
   },
   label: {
     fontSize: Size.font_20,
-    fontFamily:Fonts.MEDIUM,
+    fontFamily: Fonts.BOLD,
     marginBottom: scale(8),
+    color: colors.INDIGO,
   },
   description: {
     fontSize: Size.font_16,
-    color: colors.GRAY,
+    color: colors.DARK_BLUE,
     marginBottom: scale(15),
+    top: scale(8),
+  },
+  inputWithIcon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: scale(0.5),
+    borderColor: colors.LIGHT_GRAY,
+    borderRadius: scale(10),
+    backgroundColor: colors.WHITE,
   },
   input: {
-    borderWidth: scale(1),
-    borderColor: colors.MODERATE_PURPLE,
-    borderRadius: scale(10),
+    flex: 1,
     paddingVertical: scale(12),
     paddingHorizontal: scale(16),
-    marginBottom: scale(15),
     fontSize: Size.fonts_16,
+    borderWidth: scale(0.5),
+    borderColor: colors.LIGHT_GRAY,
+    borderRadius: scale(10),
+    backgroundColor: colors.WHITE,
+    
+  },
+  inputIcon: {
+    width: scale(24),
+    height: scale(24),
+    marginRight: scale(10),
   },
   updateButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderRadius: scale(14),
-    borderColor:colors.MODERATE_PURPLE ,
+    borderColor: colors.MODERATE_PURPLE,
     borderWidth: scale(1),
     backgroundColor: colors.WHITE,
-    alignItems: "center",
-    justifyContent: "center",
     paddingVertical: scale(18),
     marginBottom: scale(15),
   },
   updateButtonText: {
-    color: colors.BLACK,
-    fontFamily:Fonts.MEDIUM
+    color: colors.GRAY1,
+    fontFamily: Fonts.BOLD,
+    paddingLeft: scale(10),
+    flex: 1,
+    fontSize:Size.fonts_24
+  },
+  buttonIcon: {
+    width: scale(24),
+    height: scale(24),
+    marginRight: scale(10),
   },
   saveButton: {
     borderRadius: 40,
@@ -162,9 +184,9 @@ const styles = StyleSheet.create({
     paddingVertical: scale(18),
   },
   saveButtonText: {
-    color: colors.LIGHT_YELLOW,
-    fontSize: Size.fonts_20,
-    fontFamily:Fonts.BOLD,
+    color: colors.WHITE,
+    fontSize: Size.fonts_16,
+    fontFamily: Fonts.BOLD,
   },
 });
 

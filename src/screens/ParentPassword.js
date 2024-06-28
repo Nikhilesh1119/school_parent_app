@@ -1,16 +1,18 @@
 import * as React from "react";
 import { View, StyleSheet, Image, Text, Pressable, TextInput } from "react-native";
+import Backbutton from '../assets/images/Backbutton.png';
 
+import colors from '@src/theme/colors';
+import { Size, Weight, Colors, Fonts } from '@src/theme/fonts';
+import { scale } from 'react-native-size-matters';
 export default function ParentPassword() {
   return (
     <View style={styles.container}>
       {/* Privacy and Security Section */}
       <View style={styles.section}>
-        <Image
+      <Image
           resizeMode="contain"
-          source={{
-            uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/31fdcf36ef7c35c6aff84728b376cb10ff05976bc9d122d530994faee5dbcc83?apiKey=5571847fc48447bbad48faecb3b890d9&",
-          }}
+          source={Backbutton}
           style={styles.image}
         />
         <View style={styles.sectionTitle}>
@@ -25,7 +27,6 @@ export default function ParentPassword() {
         <Image
           resizeMode="contain"
           source={{
-            uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/1516a5c7390db32a20d0c78488a5fd606d5082c3b62f2c63a462aaea9134f028?apiKey=5571847fc48447bbad48faecb3b890d9&",
           }}
           style={styles.image}
         />
@@ -38,7 +39,6 @@ export default function ParentPassword() {
         <Image
           resizeMode="contain"
           source={{
-            uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/1516a5c7390db32a20d0c78488a5fd606d5082c3b62f2c63a462aaea9134f028?apiKey=5571847fc48447bbad48faecb3b890d9&",
           }}
           style={styles.image}
         />
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginRight: 10,
+    top:scale(-18)
   },
   sectionTitle: {
     flex: 1,
@@ -93,13 +94,15 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 22,
     fontWeight: "700",
-    marginLeft:45
+    marginLeft:45,
+    color:colors.BLACK
   },
   subtitleText: {
     fontSize: 20,
-    fontWeight: "900",
+    fontFamily:Fonts.BOLD,
     marginTop: 20,
-    marginLeft:60
+    marginLeft:60,
+    color:colors.BLACK
   },
   inputContainer: {
     marginBottom: 20,
