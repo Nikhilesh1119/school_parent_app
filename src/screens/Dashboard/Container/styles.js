@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.BOLD,
     color: colors.INDIGO,
     paddingLeft: scale(5),
-    marginTop: -scale(-2),
+    marginTop: scale(-2),
   },
   dateText: {
     fontSize: Size.font_20,
@@ -154,12 +154,21 @@ const styles = StyleSheet.create({
     fontWeight: Weight.semi,
     borderRadius: scale(10),
     paddingHorizontal: scale(15),
-    backgroundColor: colors.MID_GRAY,
+    backgroundColor: colors.PURPLE11,
     top: scale(3),
     marginLeft: scale(-5),
   },
   sidebarEditText: { color: colors.PURPLE1 },
-  sidebarItem: { paddingVertical: scale(8), top: scale(15), flexDirection: 'row', alignItems: 'center' },
+  sidebarItem: { paddingVertical: scale(8), top: scale(15), flexDirection: 'row',paddingLeft:scale(10), alignItems: 'center',backgroundColor:colors.WHITE,borderRadius:scale(20) },
+  sidebarItem1: {paddingVertical: scale(8), top: scale(15), flexDirection: 'row',paddingLeft:scale(10), alignItems: 'center',backgroundColor:colors.WHITE,borderRadius:scale(20) , marginTop:scale(8)},
+  sidebarItemImage: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+    backgroundColor:colors.Light_Purple1,
+    borderRadius:scale(10),
+    
+  },
   sidebarItemText: {
     fontSize: Size.font_14,
     color: colors.PURPLE1,

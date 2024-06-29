@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -23,6 +23,7 @@ import help from '@src/assets/images/help.png';
 import downarrow from '@src/assets/images/downarrow.png';
 import { useTranslation } from 'react-i18next';
 import styles from './styles';
+import { AuthContext } from '@src/context/AuthContext';
 
 export default function ProfileScreen({ navigation }) {
   const [form, setForm] = useState({
@@ -36,7 +37,8 @@ export default function ProfileScreen({ navigation }) {
   const [studentModalVisible, setStudentModalVisible] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState('John Doe');
   const {t} = useTranslation()
-
+  
+  const {childrenData} = useContext(AuthContext);
   const students = [
     { label: 'John Doe', value: 'John Doe' },
     { label: 'Jane Smith', value: 'Jane Smith' },

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -11,16 +11,20 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Calendar from '@src/screens/Dashboard/Components/Calendar/index'; // Assuming Calendar is a custom component
 import colors from '@src/theme/colors';
 import styles from './styles';
-import Icon from 'react-native-vector-icons/Ionicons'; // Add this line to import the Icon component
-import Navigation from '../../../navigation/Navigation';
-import { useNavigation } from '@react-navigation/native';
-import { ROUTE } from '../../../navigation/constant';
+import Vector from '@src/assets/images/Vector.png';
+import Signout from '@src/assets/images/Signout.png';
+import {useNavigation} from '@react-navigation/native';
+import {ROUTE} from '@src/navigation/constant';
+import {axiosClient} from '@src/services/axiosClient';
+import {AuthContext} from '@src/context/AuthContext';
+
 const AttendanceDashboard = () => {
-  const navigation=useNavigation();
+  const navigation = useNavigation();
+  const {currentChild} = useContext(AuthContext);
   const [selectedView, setSelectedView] = useState('Daily');
   const [confirmationMessage, setConfirmationMessage] = useState('');
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -32,14 +36,13 @@ const AttendanceDashboard = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
   const swipeableRef = useRef(null);
   const slideAnim = useRef(
-    new Animated.Value(Dimensions.get('window').height)
+    new Animated.Value(Dimensions.get('window').height),
   ).current;
 
   useEffect(() => {
     setTotalDaysPresentMonth(20);
     setTotalDaysPresentYear(150);
 
-    // Slide in the popup from below
     Animated.timing(slideAnim, {
       toValue: 0,
       duration: 500,
@@ -62,12 +65,11 @@ const AttendanceDashboard = () => {
     if (!selectedAttendance) {
       Alert.alert(
         'Error',
-        'Please select an attendance status before proceeding.'
+        'Please select an attendance status before proceeding.',
       );
       return;
     }
 
-    // Close the popup
     Animated.timing(slideAnim, {
       toValue: Dimensions.get('window').height,
       duration: 500,
@@ -78,7 +80,7 @@ const AttendanceDashboard = () => {
       setIsPopupVisible(false);
       Alert.alert(
         'Attendance Marked',
-        `You marked this day as ${selectedAttendance}`
+        `You marked this day as ${selectedAttendance}`,
       );
     });
   };
@@ -96,8 +98,7 @@ const AttendanceDashboard = () => {
               <TouchableOpacity
                 style={styles.menuButton}
                 onPress={() => setIsSidebarVisible(!isSidebarVisible)}
-                disabled={isPopupVisible}
-              >
+                disabled={isPopupVisible}>
                 <Text style={styles.menuText}>≡</Text>
               </TouchableOpacity>
             </View>
@@ -147,30 +148,37 @@ const AttendanceDashboard = () => {
             {/* Sidebar */}
             {isSidebarVisible && (
               <TouchableWithoutFeedback
-                onPress={() => setIsSidebarVisible(false)}
-              >
+                onPress={() => setIsSidebarVisible(false)}>
                 <View style={styles.sidebar}>
                   <View style={styles.sidebarHeader}>
                     <Image
-                      source={{ uri: 'https://via.placeholder.com/50' }} // Replace with the actual profile image URL
+                      source={{
+                        uri: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80',
+                      }} // Replace with the actual profile image URL
                       style={styles.profileImage}
                     />
                     <View style={styles.sidebarHeadersub}>
                       <Text style={styles.profileName}>John Doe</Text>
-                      <TouchableOpacity style={styles.sidebarEdit} onPress={()=>navigation.navigate(ROUTE.PARENT_EDIT)}>
+                      <TouchableOpacity
+                        style={styles.sidebarEdit}
+                        onPress={() =>
+                          navigation.navigate(ROUTE.PARENT_PROFILE_EDIT)
+                        }>
                         <Text style={styles.sidebarEditText}>Edit Profile</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
 
-                  <TouchableOpacity style={styles.sidebarItem}>
-                    <Icon name="lock-closed" size={20} color={colors.PURPLE1} />
+                  <TouchableOpacity
+                    style={styles.sidebarItem}
+                    onPress={() => navigation.navigate(ROUTE.PARENT_EDIT)}>
+                    <Image source={Vector} style={styles.sidebarItemImage} />
                     <Text style={styles.sidebarItemText}>
                       Privacy and Security
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.sidebarItem}>
-                    <Icon name="log-out" size={20} color={colors.PURPLE1} />
+                  <TouchableOpacity style={styles.sidebarItem1}>
+                    <Image source={Signout} style={styles.sidebarItemImage} />
                     <Text style={styles.sidebarItemText}>Logout</Text>
                   </TouchableOpacity>
                 </View>
@@ -187,15 +195,13 @@ const AttendanceDashboard = () => {
 
           {/* Slide Popup Component */}
           <Animated.View
-            style={[styles.popup, { transform: [{ translateY: slideAnim }] }]}
-          >
+            style={[styles.popup, {transform: [{translateY: slideAnim}]}]}>
             <TouchableWithoutFeedback onPress={() => setIsPopupVisible(false)}>
               <View style={styles.popupContent}>
                 <View style={styles.popupButtonContainer}>
                   <TouchableOpacity
                     onPress={handleDoneClick}
-                    style={styles.doneButton}
-                  >
+                    style={styles.doneButton}>
                     <Text style={styles.doneButtonText}>Done</Text>
                   </TouchableOpacity>
                 </View>
@@ -214,8 +220,7 @@ const AttendanceDashboard = () => {
                             ? colors.DARK_ORANGE
                             : colors.LIGHT_ORANGE,
                       },
-                    ]}
-                  >
+                    ]}>
                     <Text
                       style={[
                         styles.attendanceOptionText,
@@ -225,8 +230,7 @@ const AttendanceDashboard = () => {
                               ? colors.WHITE
                               : colors.DARK_ORANGE,
                         },
-                      ]}
-                    >
+                      ]}>
                       Absent
                     </Text>
                   </TouchableOpacity>
@@ -240,8 +244,7 @@ const AttendanceDashboard = () => {
                             ? colors.DARK_CYAN
                             : colors.LIGHT_CYAN,
                       },
-                    ]}
-                  >
+                    ]}>
                     <Text
                       style={[
                         styles.attendanceOptionText,
@@ -251,8 +254,7 @@ const AttendanceDashboard = () => {
                               ? colors.WHITE
                               : colors.DARK_CYAN,
                         },
-                      ]}
-                    >
+                      ]}>
                       Present
                     </Text>
                   </TouchableOpacity>

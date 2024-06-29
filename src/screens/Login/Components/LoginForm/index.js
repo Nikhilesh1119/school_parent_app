@@ -1,4 +1,4 @@
-import {useContext, useState, useEffect} from 'react';
+import {useContext, useState} from 'react';
 import {Formik} from 'formik';
 import {useNavigation} from '@react-navigation/native';
 import logo from '@src/assets/images/logo.png';
@@ -10,21 +10,19 @@ import {
   ToastAndroid,
   KeyboardAvoidingView,
   Image,
-  Keyboard,
   ScrollView,
-  Platform,
 } from 'react-native';
 import {object, string} from 'yup';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {AuthContext} from '@src/context/AuthContext';
+import Eye from '@src/assets/images/Eye.png';
+import openEye from '@src/assets/images/openEye.png';
 import {axiosClient} from '@src/services/axiosClient';
 import {styles} from './styles';
 import {ROUTE} from '@src/navigation/constant';
+import {AuthContext} from '@src/context/AuthContext';
 
 export default function LoginForm() {
   const {login} = useContext(AuthContext);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
   const userSchemaValidation = object({
     password: string()
@@ -32,37 +30,13 @@ export default function LoginForm() {
       .required('password is required'),
   });
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => {
-        setKeyboardVisible(true);
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setKeyboardVisible(false);
-      }
-    );
-
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
-    };
-  }, []);
-
-  const handlePasswordVisibility = () => {
+  const handlePasswordVisibility = e => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollContainer}
-        keyboardShouldPersistTaps="handled">
+    <ScrollView>
+      <View style={styles.container}>
         <Formik
           initialValues={{
             user: '',
@@ -71,12 +45,12 @@ export default function LoginForm() {
           validationSchema={userSchemaValidation}
           onSubmit={async values => {
             try {
-              console.log(values);
+              // console.log(values);
               const res = await axiosClient.post('/parent/login', {
                 user: values.user,
                 password: values.password,
               });
-              console.log(res.data);
+              // console.log(res.data);
               if (res.data.result) {
                 ToastAndroid.show(
                   'Login Successful',
@@ -84,8 +58,13 @@ export default function LoginForm() {
                   ToastAndroid.LONG,
                 );
                 setTimeout(() => {
-                  login(res.data.result.accessToken);
-                  navigation.navigate(ROUTE.UPDATE_PASSWORD);
+                  // console.log(res.data.result);
+                  login(res.data.result.accessToken, res.data.result.firstname);
+                  if (res.data.result.isLoginAlready === true) {
+                    navigation.navigate(ROUTE.TAB);
+                  } else {
+                    navigation.navigate(ROUTE.UPDATE_PASSWORD);
+                  }
                 }, 2000);
               } else {
                 ToastAndroid.show(
@@ -109,18 +88,16 @@ export default function LoginForm() {
               <View style={styles.formContainer}>
                 <View style={styles.logoContainer}>
                   <Image source={logo} alt="" style={styles.logo} />
-                  <Text style={styles.logoText}>LOGO</Text>
+                  <Text style={styles.logoText}>Logo</Text>
                 </View>
                 <View style={styles.infocontainer}>
                   <View style={styles.welcomeContainer}>
                     <Text style={styles.welcomeTextPrimary}>Welcome, </Text>
                     <Text style={styles.welcomeTextSecondary}>Login Here</Text>
                   </View>
-                  {!isKeyboardVisible && (
-                    <Text style={styles.description}>
-                      Enter your credentials to get access to your account.
-                    </Text>
-                  )}
+                  <Text style={styles.description}>
+                    Enter your credentials to get access to your account.
+                  </Text>
                   <View style={styles.inputContainer}>
                     <Text style={styles.inputLabel}>
                       Phone, email or username
@@ -152,11 +129,10 @@ export default function LoginForm() {
                       <TouchableOpacity
                         style={styles.passwordVisibilityToggle}
                         onPress={handlePasswordVisibility}>
-                        {isPasswordVisible ? (
-                          <Icon name="eye" size={30} color="black" />
-                        ) : (
-                          <Icon name="eye-slash" size={30} color="black" />
-                        )}
+                        <Image
+                          source={isPasswordVisible ? openEye : Eye}
+                          style={styles.eyeIcon}
+                        />
                       </TouchableOpacity>
                     </View>
                     {touched.password && errors.password && (
@@ -179,7 +155,7 @@ export default function LoginForm() {
             );
           }}
         </Formik>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </View>
+    </ScrollView>
   );
 }
