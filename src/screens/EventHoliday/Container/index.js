@@ -1,24 +1,69 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
   ScrollView,
-  TouchableOpacity,
   TouchableWithoutFeedback,
-  Image,
-  StyleSheet,
 } from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Calendar from '@src/screens/EventHoliday/Components/Calendar/index';
 import styles from './styles';
+import {axiosClient} from '@src/services/axiosClient';
+
 const Eventholiday = () => {
+  const [eventsArr, setEventsArr] = useState([]);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const currentDate = new Date();
+  const dayNames = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const day = currentDate.getDate();
+  const dayName = dayNames[currentDate.getDay()];
+  const month = monthNames[currentDate.getMonth()];
+  const year = currentDate.getFullYear();
 
   const handleOutsidePress = () => {
     if (isSidebarVisible) {
       setIsSidebarVisible(false);
     }
   };
+
+  const fetchEvents = async () => {
+    try {
+      const response = await axiosClient.get('/holiday-event');
+      // console.log(response.data.result);
+      const sortedEvents = response.data.result.sort(
+        (a, b) => new Date(a.date) - new Date(b.date),
+      );
+      setEventsArr(sortedEvents);
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
   return (
     <GestureHandlerRootView style={styles.root}>
@@ -32,11 +77,11 @@ const Eventholiday = () => {
             <View style={styles.content}>
               <View style={styles.calendarContainer}>
                 <View style={styles.calendarHeader}>
-                  <Text style={styles.calendarMonth}>June</Text>
-                  <Text style={styles.calendarYear}>, 2024</Text>
+                  <Text style={styles.calendarMonth}>{month}</Text>
+                  <Text style={styles.calendarYear}>, {year}</Text>
                 </View>
                 <View style={styles.calendar}>
-                  <Calendar />
+                  <Calendar event={eventsArr} />
                 </View>
               </View>
 
@@ -44,9 +89,25 @@ const Eventholiday = () => {
               <View style={styles.eventsContainer}>
                 <ScrollView>
                   <Text style={styles.eventsTitle}>Holidays and Events</Text>
-                  <Text style={styles.eventDate}>3 May 2024, Friday</Text>
+                  <Text style={styles.eventDate}>
+                    {' '}
+                    {day} {month} {year}, {dayName}
+                  </Text>
                   <View style={styles.divider} />
-                  <View style={styles.holidayItem}>
+                  {eventsArr.map((e, i) => (
+                    <View key={i}>
+                      <View style={styles.holidayItem}>
+                        <View style={styles.holidayItemHeader}>
+                          <View style={styles.holidayIndicator} />
+                          <Text style={styles.holidayText}>{e.title}</Text>
+                        </View>
+                        <View style={styles.holidayLabel}>
+                          <Text style={styles.holidayLabelText}>Holiday</Text>
+                        </View>
+                      </View>
+                    </View>
+                  ))}
+                  {/* <View style={styles.holidayItem}>
                     <View style={styles.holidayItemHeader}>
                       <View style={styles.holidayIndicator} />
                       <Text style={styles.holidayText}>HOLI</Text>
@@ -54,8 +115,8 @@ const Eventholiday = () => {
                     <View style={styles.holidayLabel}>
                       <Text style={styles.holidayLabelText}>Holiday</Text>
                     </View>
-                  </View>
-                  <View style={styles.eventItem}>
+                  </View> */}
+                  {/* <View style={styles.eventItem}>
                     <View style={styles.eventItemHeader}>
                       <View style={styles.eventIndicator} />
                       <Text style={styles.eventText}>HOLI</Text>
@@ -63,7 +124,7 @@ const Eventholiday = () => {
                     <View style={styles.eventLabel}>
                       <Text style={styles.eventLabelText}>Occasion</Text>
                     </View>
-                  </View>
+                  </View> */}
                   {/* Add more event/holiday items here */}
                 </ScrollView>
               </View>
@@ -75,7 +136,5 @@ const Eventholiday = () => {
     </GestureHandlerRootView>
   );
 };
-
-
 
 export default Eventholiday;

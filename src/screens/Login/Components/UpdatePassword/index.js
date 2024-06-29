@@ -10,15 +10,16 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import { Size, Weight, Colors, Fonts } from '@src/theme/fonts';
-import { Formik } from 'formik';
+import { Fonts} from '@src/theme/fonts';
+import {Formik} from 'formik';
 import * as Yup from 'yup';
-import { axiosClient } from '@src/services/axiosClient';
-import { useNavigation } from '@react-navigation/native';
+import {axiosClient} from '@src/services/axiosClient';
+import {useNavigation} from '@react-navigation/native';
 import update from '@src/assets/images/update.png';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { ROUTE } from '@src/navigation/constant';
+import {ROUTE} from '@src/navigation/constant';
 import styles from './styles';
+import Eye from '@src/assets/images/Eye.png';
+import openEye from '@src/assets/images/openEye.png';
 
 export default function UpdatePassword() {
   const [isLogin, setIsLogin] = React.useState(false);
@@ -28,7 +29,7 @@ export default function UpdatePassword() {
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     React.useState(false);
 
-  const handlePasswordVisibility = (field) => {
+  const handlePasswordVisibility = field => {
     if (field === 'password') {
       setIsPasswordVisible(!isPasswordVisible);
     } else if (field === 'confirmPassword') {
@@ -44,7 +45,7 @@ export default function UpdatePassword() {
       .required('Confirm Password is required'),
   });
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async values => {
     console.log(values);
     const res = await axiosClient.put('parent/auth-update', values);
     console.log(res.result);
@@ -64,19 +65,17 @@ export default function UpdatePassword() {
             width: '100%',
             justifyContent: 'center',
             alignItems: 'center',
-          }}
-        >
-          <Image source={update} style={{ height: 300, width: 300 }} />
-          <Text style={{ fontSize: 24, fontFamily: Fonts.BOLD, color: 'white' }}>
+          }}>
+          <Image source={update} style={{height: 300, width: 300}} />
+          <Text style={{fontSize: 24, fontFamily: Fonts.BOLD, color: 'white'}}>
             Password Updated!
           </Text>
         </View>
       ) : (
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={{ flex: 1 }}
-        >
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          style={{flex: 1}}>
+          <ScrollView contentContainerStyle={{flexGrow: 1}}>
             <View style={styles.container}>
               <View style={styles.header}>
                 <View style={styles.logoContainer}>
@@ -85,10 +84,13 @@ export default function UpdatePassword() {
                 <Text style={styles.logoTitle}>LOGO</Text>
               </View>
               <Formik
-                initialValues={{ username: '', password: '', confirmPassword: '' }}
+                initialValues={{
+                  username: '',
+                  password: '',
+                  confirmPassword: '',
+                }}
                 validationSchema={validationSchema}
-                onSubmit={handleSubmit}
-              >
+                onSubmit={handleSubmit}>
                 {({
                   handleChange,
                   handleBlur,
@@ -127,15 +129,22 @@ export default function UpdatePassword() {
                           onBlur={handleBlur('password')}
                           value={values.password}
                         />
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                           style={styles.passwordVisibilityToggle}
-                          onPress={() => handlePasswordVisibility('password')}
-                        >
+                          onPress={() => handlePasswordVisibility('password')}>
                           {isPasswordVisible ? (
                             <Icon name="eye" size={22} color="black" />
                           ) : (
                             <Icon name="eye-slash" size={22} color="black" />
                           )}
+                        </TouchableOpacity> */}
+                        <TouchableOpacity
+                          style={styles.passwordVisibilityToggle}
+                          onPress={() => handlePasswordVisibility('password')}>
+                          <Image
+                            source={isPasswordVisible ? openEye : Eye}
+                            style={styles.eyeIcon}
+                          />
                         </TouchableOpacity>
                       </View>
                       {touched.password && errors.password && (
@@ -154,7 +163,7 @@ export default function UpdatePassword() {
                           onBlur={handleBlur('confirmPassword')}
                           value={values.confirmPassword}
                         />
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                           style={styles.passwordVisibilityToggle}
                           onPress={() =>
                             handlePasswordVisibility('confirmPassword')
@@ -165,6 +174,16 @@ export default function UpdatePassword() {
                           ) : (
                             <Icon name="eye-slash" size={22} color="black" />
                           )}
+                        </TouchableOpacity> */}
+                        <TouchableOpacity
+                          style={styles.passwordVisibilityToggle}
+                          onPress={() =>
+                            handlePasswordVisibility('confirmPassword')
+                          }>
+                          <Image
+                            source={isConfirmPasswordVisible ? openEye : Eye}
+                            style={styles.eyeIcon}
+                          />
                         </TouchableOpacity>
                       </View>
                       {touched.confirmPassword && errors.confirmPassword && (
@@ -176,8 +195,7 @@ export default function UpdatePassword() {
 
                     <TouchableOpacity
                       style={styles.button}
-                      onPress={handleSubmit}
-                    >
+                      onPress={handleSubmit}>
                       <Text style={styles.buttonText}>Update Password</Text>
                     </TouchableOpacity>
                   </View>

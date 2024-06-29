@@ -1,4 +1,4 @@
-import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
+import {Size, Fonts} from '@src/theme/fonts';
 import colors from '@src/theme/colors';
 import {scale} from 'react-native-size-matters';
 import {StyleSheet} from 'react-native';
@@ -81,6 +81,10 @@ const styles = StyleSheet.create({
   passwordVisibilityToggle: {
     position: 'absolute',
     right: scale(16),
+  },
+  eyeIcon: {
+    width: 20,
+    height: 20,
   },
   button: {
     marginTop: scale(40),
