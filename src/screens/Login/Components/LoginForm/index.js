@@ -12,7 +12,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import {object, string} from 'yup';
+import {object, string, ref} from 'yup';
 import Eye from '@src/assets/images/Eye.png';
 import openEye from '@src/assets/images/openEye.png';
 import {axiosClient} from '@src/services/axiosClient';
@@ -23,68 +23,78 @@ import {AuthContext} from '@src/context/AuthContext';
 export default function LoginForm() {
   const {login} = useContext(AuthContext);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
   const navigation = useNavigation();
   const userSchemaValidation = object({
+    user: string().required('User is required'),
     password: string()
-      .min(8, 'password must have at least 8 characters')
-      .required('password is required'),
+      .min(8, 'Password must have at least 8 characters')
+      .required('Password is required'),
+    confirmPassword: string()
+      .oneOf([ref('password'), null], 'Passwords must match')
+      .required('Confirm Password is required'),
   });
 
-  const handlePasswordVisibility = e => {
+  const handlePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  const handleConfirmPasswordVisibility = () => {
+    setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
+  };
+
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Formik
-          initialValues={{
-            user: '',
-            password: '',
-          }}
-          validationSchema={userSchemaValidation}
-          onSubmit={async values => {
-            try {
-              // console.log(values);
-              const res = await axiosClient.post('/parent/login', {
-                user: values.user,
-                password: values.password,
-              });
-              // console.log(res.data);
-              if (res.data.result) {
-                ToastAndroid.show(
-                  'Login Successful',
-                  ToastAndroid.TOP,
-                  ToastAndroid.LONG,
-                );
-                setTimeout(() => {
-                  // console.log(res.data.result);
-                  login(res.data.result.accessToken, res.data.result.firstname);
-                  if (res.data.result.isLoginAlready === true) {
-                    navigation.navigate(ROUTE.TAB);
-                  } else {
-                    navigation.navigate(ROUTE.UPDATE_PASSWORD);
-                  }
-                }, 2000);
-              } else {
-                ToastAndroid.show(
-                  res.data.message,
-                  ToastAndroid.LONG,
-                  ToastAndroid.TOP,
-                );
-              }
-            } catch (error) {}
-          }}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-            resetForm,
-          }) => {
-            return (
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={styles.container}>
+          <Formik
+            initialValues={{
+              user: '',
+              password: '',
+              confirmPassword: '',
+            }}
+            validationSchema={userSchemaValidation}
+            onSubmit={async values => {
+              console.log('Login pressed');
+              try {
+                const res = await axiosClient.post('/parent/login', {
+                  user: values.user,
+                  password: values.password,
+              
+                });
+                console.log(res.data);
+                if (res.data.result) {
+                  ToastAndroid.show(
+                    'Login Successful',
+                    ToastAndroid.TOP,
+                    ToastAndroid.LONG,
+                  );
+                  setTimeout(() => {
+                    login(res.data.result.accessToken, res.data.result.firstname);
+                    if (res.data.result.isLoginAlready === true) {
+                      navigation.navigate(ROUTE.TAB);
+                    } else {
+                      navigation.navigate(ROUTE.UPDATE_PASSWORD);
+                    }
+                  }, 2000);
+                } else {
+                  ToastAndroid.show(
+                    res.data.message,
+                    ToastAndroid.LONG,
+                    ToastAndroid.TOP,
+                  );
+                }
+              } catch (error) {}
+            }}>
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+              resetForm,
+            }) => (
               <View style={styles.formContainer}>
                 <View style={styles.logoContainer}>
                   <Image source={logo} alt="" style={styles.logo} />
@@ -99,9 +109,7 @@ export default function LoginForm() {
                     Enter your credentials to get access to your account.
                   </Text>
                   <View style={styles.inputContainer}>
-                    <Text style={styles.inputLabel}>
-                      Phone, email or username
-                    </Text>
+                    <Text style={styles.inputLabel}>Phone, email or username</Text>
                     <TextInput
                       onChangeText={handleChange('user')}
                       onBlur={handleBlur('user')}
@@ -139,6 +147,31 @@ export default function LoginForm() {
                       <Text style={styles.errorText}>{errors.password}</Text>
                     )}
                   </View>
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.inputLabel}>Confirm Password</Text>
+                    <View style={styles.passwordInputContainer}>
+                      <TextInput
+                        onChangeText={handleChange('confirmPassword')}
+                        onBlur={handleBlur('confirmPassword')}
+                        value={values.confirmPassword}
+                        style={styles.passwordInput}
+                        placeholder="Confirm Your Password"
+                        placeholderTextColor={'black'}
+                        secureTextEntry={!isConfirmPasswordVisible}
+                      />
+                      <TouchableOpacity
+                        style={styles.passwordVisibilityToggle}
+                        onPress={handleConfirmPasswordVisibility}>
+                        <Image
+                          source={isConfirmPasswordVisible ? openEye : Eye}
+                          style={styles.eyeIcon}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                    {touched.confirmPassword && errors.confirmPassword && (
+                      <Text style={styles.errorText}>{errors.confirmPassword}</Text>
+                    )}
+                  </View>
                   <TouchableOpacity
                     onPress={() => navigation.navigate('ForgotPassword')}>
                     <Text style={styles.forgotPasswordText}>
@@ -152,10 +185,10 @@ export default function LoginForm() {
                   <Text style={styles.loginButtonText}>Login</Text>
                 </TouchableOpacity>
               </View>
-            );
-          }}
-        </Formik>
-      </View>
-    </ScrollView>
+            )}
+          </Formik>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }

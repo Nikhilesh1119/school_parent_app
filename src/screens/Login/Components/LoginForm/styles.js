@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     display: 'flex-1',
     backgroundColor: Colors.WHITE,
     borderTopLeftRadius: scale(50),
-    borderTopRightRadius: scale(50),
+    borderTopRightRadius: scale(50), 
   },
   formContainer: {
     height: '100%',
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   logoText: {
     color: Colors.COLOR_7,
     fontSize: Size.font_28,
-    marginLeft: scale(8),
+    paddingLeft: scale(8),
     fontFamily: Fonts.BOLD,
   },
   infocontainer: {
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     marginTop: scale(60),
   },
   welcomeTextPrimary: {
-    fontSize: Size.font_24,
+    fontSize: Size.font_24, 
     color: Colors.COLOR_7,
     fontFamily: Fonts.BOLD,
   },
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
     fontSize: Size.font_14,
     color: Colors.COLOR_8,
     fontFamily: Fonts.BOLD,
-    marginTop: scale(20),
+    marginTop: scale(10),
   },
   inputContainer: {
     marginTop: scale(8),
@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
     borderRadius: 14,
     fontSize: Size.font_14,
     marginTop: scale(8),
-    paddingHorizontal: scale(16),
+    paddingHorizontal: scale(10),
     color: Colors.BLACK,
     fontFamily: Fonts.MEDIUM,
   },
@@ -91,7 +91,7 @@ export const styles = StyleSheet.create({
   },
   passwordInput: {
     flex: 5 / 6,
-    paddingHorizontal: scale(16),
+    paddingHorizontal: scale(10),
     color: Colors.BLACK,
     fontSize: Size.font_14,
     fontFamily: Fonts.MEDIUM,
@@ -111,12 +111,14 @@ export const styles = StyleSheet.create({
     textAlign: 'right',
     fontFamily: Fonts.BOLD,
     marginTop: scale(20),
+    marginBottom:scale(30)
   },
   loginButton: {
     backgroundColor: Colors.COLOR_7,
     paddingVertical: scale(10),
     borderRadius: scale(24),
-    marginTop: scale(24),
+    marginTop: scale(30),
+    marginBottom:scale(20)
   },
   loginButtonText: {
     color: Colors.WHITE,

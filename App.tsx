@@ -20,6 +20,7 @@ export default function App() {
     <AuthProvider>
       <I18nextProvider i18n={i18n}>
           <Navigation />
+          
       </I18nextProvider>
     </AuthProvider>
   );
