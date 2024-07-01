@@ -126,7 +126,7 @@ export const AuthProvider = ({children}) => {
       setChildrenData([]);
       setCurrentChild(null);
       console.log('logout');
-      navigation.navigate(ROUTE.LOGIN);
+      navigation.navigate(ROUTE.AUTH,{screen: ROUTE.LOGIN});
     } catch (e) {
       console.error('Logout error', e);
     }

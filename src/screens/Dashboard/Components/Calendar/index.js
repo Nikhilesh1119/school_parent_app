@@ -19,7 +19,7 @@ const MyCalendar = () => {
         hideExtraDays={true}
         disableMonthChange={true}
         disableAllTouchEventsForDisabledDays={true}
-        enableSwipeMonths={true}
+        enableSwipeMonths={false}
         renderHeader={() => null}
         theme={{
           backgroundColor: colors.WHITE,

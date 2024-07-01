@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {Size, Weight, Colors, Fonts} from '@src/theme/fonts';
-import {scale} from 'react-native-size-matters';
+import { StyleSheet } from 'react-native';
+import { Size, Weight, Colors, Fonts } from '@src/theme/fonts';
+import { scale } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   container: {
@@ -17,8 +17,8 @@ export const styles = StyleSheet.create({
     marginBottom: scale(20),
   },
   image: {
-    width: scale(24),
-    height: scale(24),
+    width: scale(22),
+    height: scale(22),
     marginRight: scale(10),
     top: scale(-36),
   },
@@ -28,8 +28,9 @@ export const styles = StyleSheet.create({
   titleText: {
     fontSize: Size.font_20,
     fontFamily: Fonts.BOLD,
-    marginLeft: scale(45),
+    marginLeft: scale(20),
     color: Colors.BLACK,
+    top: scale(8),
   },
   subtitleText: {
     fontSize: Size.font_20,
@@ -41,20 +42,35 @@ export const styles = StyleSheet.create({
   inputContainer: {
     marginBottom: scale(20),
   },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.BORDER,
+    borderRadius: scale(10),
+    paddingVertical: scale(0),
+    paddingHorizontal: scale(16),
+  },
   label: {
     fontSize: Size.font_18,
     marginTop: scale(10),
-    marginBottom: scale(-10),
+    marginBottom: scale(5),
     fontFamily: Fonts.BOLD,
     color: Colors.BLACK,
   },
   input: {
-    borderWidth: 1,
-    borderColor: Colors.BORDER,
-    borderRadius: scale(10),
-    paddingVertical: scale(12),
-    paddingHorizontal: scale(16),
+    flex: 1,
     fontSize: Size.font_16,
+  },
+  eyeIcon: {
+    width: scale(22),
+    height: scale(22),
+    marginLeft: scale(10),
+  },
+  errorMessage: {
+    color: 'red',
+    fontSize: Size.font_14,
+    marginVertical: scale(10),
   },
   saveButton: {
     borderRadius: scale(40),

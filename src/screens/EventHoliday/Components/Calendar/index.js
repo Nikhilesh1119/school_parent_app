@@ -22,14 +22,14 @@ const MyCalendar = ({ event }) => {
 
     event.forEach(curr => {
       const date = formatDateString(curr.createdAt);
-      newMarkedDates[date] = { marked: true, dotColor: colors.RED };
+      newMarkedDates[date] = { marked: true, dotColor: colors.PURPLE };
     });
 
     if (selectedDate) {
       newMarkedDates[selectedDate] = {
         selected: true,
         marked: true,
-        selectedColor: colors.RED,
+        selectedColor: colors.PURPLE,
       };
     }
 
@@ -50,7 +50,7 @@ const MyCalendar = ({ event }) => {
         hideExtraDays={true}
         disableMonthChange={true}
         disableAllTouchEventsForDisabledDays={true}
-        enableSwipeMonths={true}
+        enableSwipeMonths={false}
         renderHeader={() => null}
         theme={{
           backgroundColor: colors.WHITE,

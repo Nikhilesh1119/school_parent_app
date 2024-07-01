@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   summaryBox: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: scale(28),
+    paddingHorizontal: scale(18),
     paddingVertical: scale(16),
     marginTop: scale(20),
     borderRadius: scale(12),
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.BOLD,
     color: colors.INDIGO,
     fontSize: Size.font_18,
+    
   },
   summarySubtitleText: {
     marginTop: scale(10),
